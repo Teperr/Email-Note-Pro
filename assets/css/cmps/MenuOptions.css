@@ -1,0 +1,38 @@
+.Menu-options {
+    min-width: 100px;
+    background-color: rgb(215, 215, 215);
+    flex-grow: 1;
+
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    margin-block: 1em;
+    gap: 1em;
+
+}
+
+
+
+.list-container span{
+    padding: 1em;
+
+}
+
+.list-container span button {
+
+    all: unset;
+
+}
+
+.list-container span i {
+    margin-inline: 1em;
+    
+
+}
+
+.list-container span:hover {
+    background-color: rgb(254,239,195);
+
+}

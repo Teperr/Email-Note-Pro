@@ -1,9 +1,9 @@
 export const storageService = {
-    query,
-    get,
-    post,
-    put,
-    remove,
+    query, // LIST
+    get, // READ
+    post, // 
+    put, 
+    remove, // REMOVE
 }
 
 function query(entityType, delay = 500) {

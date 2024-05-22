@@ -1,3 +1,12 @@
+
+
 export function NoteList() {
-    return <div>note list</div>
+    return <section>
+
+        <h1>main</h1>
+
+        
+
+
+    </section>
 }
