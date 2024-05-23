@@ -22,5 +22,6 @@
 @import './cmps/AppHeader.css';
 @import './cmps/NoteIndex.css';
 @import './cmps/MenuOptions.css';
+@import './cmps/Accordion.css';
 
 /* @import './apps/mail/cmps/MailList.css'; */

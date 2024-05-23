@@ -1,6 +1,6 @@
 // note service
-import { utilService } from './util.service.js'
-import { storageService } from './async-storage.service.js'
+import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTE_KEY = 'noteDB'
 _createNotes()
@@ -11,10 +11,10 @@ export const noteService = {
     remove, // REMOVE
     save, // 
     getEmptyNote,
-    getDefaultFilter,
-    getSpeedStats,
-    getVendorStats,
-    getFilterFromSearchParams
+    // getDefaultFilter,
+    // getSpeedStats,
+    // getVendorStats,
+    // getFilterFromSearchParams
 }
 
 function query(filterBy = {}) {
@@ -56,6 +56,75 @@ function save(note) {
     }
 }
 
-function getEmptyNote(id = '', title = '', description = '', listPrice = { amount: 0, currencyCode: 0 }, pageCount = '') {
-    return { id, title, description, listPrice, pageCount }
+
+function _createNotes() {
+    let notes = utilService.loadFromStorage(NOTE_KEY)
+    if (!notes || !notes.length) {
+        notes = []
+
+
+        const types = ['text', 'todoList', 'photo', 'video']
+        for (let i = 0; i < 6; i++) {
+            const type = types[i % types.length]
+            notes.push(_createNote(type))
+        }
+
+        utilService.saveToStorage(NOTE_KEY, notes)
+    }
 }
+
+
+function _createNote(type) {
+    const note = getEmptyNote(type)
+    note.id = utilService.makeId()
+    note.createdAt = new Date()
+    note.type = type
+
+
+
+    return note
+}
+
+function getEmptyNote(type = '',createdAt = '',  isPinned = '', style = { backgroundColor: '' }, info = { title: 'Title', txt: 'Text...' }) {
+    return {createdAt, type, isPinned, style, info }
+}
+
+
+const notes = [
+    {
+        id: 'n101',
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: true,
+        style: {
+            backgroundColor: '#00d'
+        },
+        info: {
+            txt: 'Fullstack Me Baby!'
+        }
+    },
+    {
+        id: 'n102',
+        type: 'NoteImg',
+        isPinned: false,
+        info: {
+            url: 'http://some-img/me',
+            title: 'Bobi and Me'
+        },
+        style: {
+            backgroundColor: '#00d'
+        }
+    },
+    {
+        id: 'n103',
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+            title: 'Get my stuff together',
+            todos: [
+                { txt: 'Driving license', doneAt: null },
+                { txt: 'Coding power', doneAt: 187111111 }
+            ]
+        }
+    }
+]

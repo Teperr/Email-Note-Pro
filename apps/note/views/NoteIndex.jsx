@@ -1,53 +1,47 @@
-const { useState } = React
+const { useState, useEffect } = React
 
-
-const { Route, Routes } = ReactRouterDOM
-const Router = ReactRouterDOM.HashRouter
-
+import { noteService } from '../services/note.service.js'
 
 import { MenuOptions } from '../cmps/MenuOptions.jsx'
 import { NoteHeader } from '../cmps/NoteHeader.jsx'
 import { NotesPage } from '../views/NotesPage.jsx'
-import { RemindersPage } from '../views/RemindersPage.jsx'
+import { Accordion } from '../cmps/TxtNoteAccordion.jsx';
+
 
 
 export function NoteIndex() {
+    const [notes, setNotes] = useState([])
 
-    const [route, setRoute] = useState('page')
-    console.log('route:', route)
+    useEffect(() => {
+        noteService.query()
+            .then(notes => {
+                setNotes(notes)
+                console.log('notes:', notes)
+                // console.log('notes.id:', notes[0].id)
+            })
 
 
 
+    }, [])
 
+
+    // if (!notes)return <h1>loading..</h1>
     return <section>
         <div className="main-container">
             <NoteHeader />
 
+            <section>
+                <Accordion title="Title..." >
+                    <p>🍎</p>
+
+                </Accordion>
+            </section>
             <main className="main-content">
-
                 <MenuOptions />
-
-
-
-
-
-
-
-                {/* <div className="list-container">
-                    <a onClick={() => setRoute('page')} href="#">page</a>
-                    <a onClick={() => setRoute('RemindersPage')} href="#">Reminders</a>
-                </div> */}
-                {/* <NotesPage /> */}
-
-                {route === 'page' && <NotesPage />}
-                {/* {route === 'RemindersPage' && <RemindersPage />} */}
-
+                <NotesPage notes={notes} />
             </main>
-
             <div className="footer">Footer</div>
-
         </div>
-
     </section>
 
 }
