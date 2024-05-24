@@ -1,0 +1,125 @@
+.note-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-content: center;
+    gap: 10px;
+
+    margin: 10px;
+    padding: 1em;
+
+    border: 1px solid #5f636837;
+    list-style: none;
+
+}
+
+.note-preview li article {
+    position: relative;
+    border: 1px solid #5f636837;
+    box-shadow: 1.5px 1.5px 1px 0px #5f636837;
+    /* padding: 2em; */
+    width: 240px;
+    border-radius: 0.5em;
+    padding: 1em;
+    /* min-height: 230px; */
+    cursor: text;
+
+
+}
+
+.note-preview li article p {
+    padding-block-end: 20px;
+
+}
+
+/* TODO: ADD TOGGLE CLASS buttons-list */
+.buttons-list {
+
+    display: flex;
+    /* border: 1px solid black; */
+    justify-content: space-between;
+    padding: 0.5em;
+    /* background-color: red; */
+
+    position: absolute;
+    bottom: 0;
+
+
+
+}
+
+.buttons-list span {
+    margin-inline-start: 1px;
+
+    padding: 0.3em;
+    /* border: 1px solid black; */
+    /* border-radius: 50%; */
+
+
+}
+
+.buttons-list span:hover {
+    background-color: #5f636837;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.1s;
+}
+
+
+.buttons-list span button {
+    background-color: rgb(187, 174, 174);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: auto 20px; */
+    font-size: 1em;
+    width: 1.6em;
+    height: 1.6em;
+    cursor: pointer;
+}
+
+.buttons-list span button i {
+    font-size: 12px;
+
+}
+
+.note-preview li article button {
+    background: none;
+    color: inherit;
+    border: none;
+    /* cursor: text; */
+    outline: inherit;
+}
+
+.display-block {
+    display: block;
+}
+
+.pin-note-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-color-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-add-image-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-add-Archive-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-note-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

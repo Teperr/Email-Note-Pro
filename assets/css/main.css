@@ -23,5 +23,7 @@
 @import './cmps/NoteIndex.css';
 @import './cmps/MenuOptions.css';
 @import './cmps/Accordion.css';
+@import './cmps/NoteList.jsx';
+@import './cmps/NotePreview.css';
 
 /* @import './apps/mail/cmps/MailList.css'; */

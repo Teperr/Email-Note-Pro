@@ -30,7 +30,7 @@ export function NoteIndex() {
         <div className="main-container">
             <NoteHeader />
 
-            <section>
+            <section className='accordion-continer'>
                 <Accordion title="Title..." >
                     <p>🍎</p>
 

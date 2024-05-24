@@ -44,7 +44,7 @@
 } */
 
 .article {
-    background-color: rgb(161, 194, 255);
+    background-color: rgba(161, 194, 255, 0);
     flex-grow: 4;
 }
 

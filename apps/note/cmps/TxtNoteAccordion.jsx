@@ -25,21 +25,23 @@ export function Accordion() {
                     // value={filterByToEdit.title}
                     type="text"
                     name='title'
-                    placeholder='Insert book name'
+                    placeholder='Title/New Note...'
                 />
-                
 
-                <span className="arrow">⌄</span>
+                <div className="buttons-continer-accordion">
+                    <span className="todo-list"><i class="fa-regular fa-square-check"></i></span>
+                    <span className="add-photo-to-note"><i class="fa-regular fa-image"></i></span>
+                </div>
 
+                {/* <span className="arrow">⌄</span> */}
             </section>
 
             <section className="content">
 
                 {/* {children} */}
 
-                <textarea name="textarea" rows="4" cols="50" onChange={handleChange}>
-                    At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-                </textarea>
+                <textarea name="textarea" rows="4" cols="50" onChange={handleChange} placeholder="New Note..."></textarea>
+
 
             </section>
 

@@ -16,7 +16,7 @@ export function NotesPage({ notes }) {
 
     return <section className="article">
 
-        <h3>NotesPage</h3>
+        {/* <h3>NotesPage</h3> */}
         <NoteList notes={notes} />
 
 
