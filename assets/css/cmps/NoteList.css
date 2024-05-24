@@ -1,0 +1,28 @@
+.note-list{
+
+    
+}
+
+.note-list ul{
+    /* list-style: none; */
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    justify-content: center;
+    gap: 10px;
+
+    /* background-color: red; */
+    border: 1px solid black;
+}
+
+.note-article {
+    /* display: flex; */
+    border: 1px solid black;
+    padding: 10px;
+    min-width: 1000px;
+    /* background-color: red; */
+    /* gap: 20px; */
+
+
+
+}

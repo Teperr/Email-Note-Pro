@@ -1,0 +1,139 @@
+.accordion-continer{
+    display: flex;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+}
+
+.accordion {
+    padding: 0.3em;
+    /* border-bottom: 1.5px solid hsla(340 10% 52%/.5); */
+    border-radius: 0.5em 0.5em 0 0;
+    overflow: hidden;
+    border-radius: 0.5em;
+    border: 1px solid #5f636858;
+    box-shadow: 2px 2px 1px 0px #5f636837;
+    
+}
+
+.accordion .title-container {
+    cursor: pointer;
+    display: flex;
+    
+    padding-block: 0.2em;
+    /* border: 1px solid #202124; */
+    border-radius: 0.5em;
+    width: 600px;
+    
+    
+}
+.buttons-continer-accordion {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* margin-inline-start: 10px; */
+    
+    
+}
+
+.buttons-continer-accordion span{
+    /* margin-inline: 10px; */
+    font-size: 1.3em;
+    width: 2em;
+    height: 2em;
+
+
+    
+    
+}
+
+.buttons-continer-accordion span:hover{
+    background-color: #5f636837;
+    
+    border-radius: 50%;
+    transition: 0.1s;
+    
+
+}
+
+.buttons-continer-accordion span button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-inline-start: 10px; */
+    
+}
+
+.buttons-continer-accordion span button i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-inline-start: 10px; */
+    
+}
+
+.add-photo-to-note{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.accordion .title-container input {
+    flex-grow: 1;
+    margin-inline: 1em;
+    height: 40px;
+    font-size: 14px;
+
+    background: none;
+	color: inherit;
+    border: none;
+    cursor: text;
+    outline: inherit;
+    
+}
+
+.accordion .arrow {
+    scale: 2;
+    /* transition: rotate .2s; */
+    transition-duration: .2s;
+    transition-property: rotate color;
+    margin-inline: 1em;
+}
+
+.accordion .content {
+    padding-block: .5em;
+    display: none;
+    
+}
+
+.accordion.open .arrow {
+    rotate: 180deg;
+}
+
+.accordion.open .content {
+    display: block;
+    /* border: 1px solid black; */
+    
+}
+
+.accordion.open .content textarea {
+    display: block;
+    padding: 0.8em;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    background: none;
+	color: inherit;
+    border: none;
+    cursor: text;
+    outline: inherit;
+    
+}
+
+
+
