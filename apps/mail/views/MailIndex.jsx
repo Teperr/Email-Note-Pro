@@ -1,5 +1,5 @@
-
+import { MailHeader } from "../cmps/mailAppHeader.jsx"
 export function MailIndex() {
-    return <div>mail app</div>
+    return <MailHeader/>
 }
 
