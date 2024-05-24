@@ -10,7 +10,10 @@ import { RemindersPage } from "./apps/note/views/RemindersPage.jsx"
 import { LabelsPage } from "./apps/note/views/LabelsPage.jsx"
 import { ArchivesPage } from "./apps/note/views/ArchivesPage.jsx"
 import { GarbagePage } from "./apps/note/views/GarbagePage.jsx"
-
+import { StarredPage } from "./apps/mail/views/StarredPage.jsx"
+import { SentPage } from "./apps/mail/views/sentPage.jsx"
+import { TrashPage } from "./apps/mail/views/trashPage.jsx"
+import { DraftsPage } from "./apps/mail/views/draftPage.jsx"
 
 
 export function App() {
@@ -26,6 +29,11 @@ export function App() {
                 <Route path="/note/label" element={<LabelsPage />} />
                 <Route path="/note/archive" element={<ArchivesPage />} />
                 <Route path="/note/garbage" element={<GarbagePage />} />
+                <Route path="/mail/starred" element={<StarredPage />} />
+                <Route path="/mail/sent" element={<SentPage />} />
+                <Route path="/mail/trash" element={<TrashPage />} />
+                <Route path="/mail/drafts" element={<DraftsPage />} />
+
             </Routes>
         </section>
     </Router>
