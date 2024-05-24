@@ -1,5 +1,17 @@
-export function MailPages(){
+import { MailPreview } from "../cmps/mailPreview.jsx"
+
+export function MailPages({mails}){
+
+    console.log('mails MailList:', mails)
 return(
-    <h1>inbox</h1>
+     <section className="mail-list">
+        <ul className="mail-preview">
+            {mails.map(mail =>
+                <li key={mail.id} >
+                    <MailPreview mail={mail} />
+
+                </li>)}
+        </ul>
+    </section>
 )
 }

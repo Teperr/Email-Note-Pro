@@ -6,7 +6,6 @@ const loggedinUser = {
     email: 'IdanElfasi60167@gmail.com',  
     fullname: 'Idan Elfasi' 
     }
-
 const MAIL_KEY = 'mailDB'
 _createMails()
 export const mailService = {
@@ -14,7 +13,6 @@ export const mailService = {
     get,
     remove,
     save,
-    getEmptyMail,
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -65,26 +63,24 @@ function _createMails() {
     if (!mails || !mails.length) {
         mails = []
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 6; i++) {
             const mail =
             {
-                id: 'e101',
-                subject: 'Miss you!',
-                body: 'Would love to catch up sometimes',
+                id: utilService.makeId(5),
+                subject: utilService.makeLorem(3),
+                body: utilService.makeLorem(15),
                 isRead: false,
-                sentAt: 1551133930594,
+                sentAt: {
+                    month:utilService.getMonthName(new Date().getMonth()+1),
+                    day:new Date().getDate()
+                },
                 removedAt: null,
-                from: 'momo@momo.com',
-                to: 'user@appsus.com'
+                from:utilService.makeLorem(1)+'@gmail.com',
+                to: loggedinUser.email
             }
 
             mails.push(mail)
         }
-        //    const updateMails= mails.map((mail,idx) => {
-        //         mail.prevMail=copyMails[idx-1];
-        //         mail.nextMail=copyMails[idx+1];
-        //         return mail
-        //     });
         utilService.saveToStorage(MAIL_KEY, mails)
         console.log('mails', mails)
     }
