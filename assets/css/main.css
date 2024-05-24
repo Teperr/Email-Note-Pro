@@ -17,10 +17,13 @@
 
 /* @import './apps/note/views/NoteIndex.css'; */
 
-/* @import './apps/mail/views/MailIndex.css'; */
+/* mails-views */
+@import './apps/mail/views/MailIndex.css';
+@import './apps/mail/views/mail-pages.css';
 
 /* mailCmps */
 @import './apps/mail/cmps/mailHeader.css';
+@import './apps/mail/cmps/mail-preview.css';
 
 /* Cmps */
 

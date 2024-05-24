@@ -71,7 +71,7 @@ function _createMails() {
                 body: utilService.makeLorem(15),
                 isRead: false,
                 sentAt: {
-                    month:utilService.getMonthName(new Date().getMonth()+1),
+                    month:utilService.getMonthName(new Date().getMonth()),
                     day:new Date().getDate()
                 },
                 removedAt: null,
