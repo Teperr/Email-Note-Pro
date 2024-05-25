@@ -27,7 +27,7 @@ export function MailPreview({ mail }) {
 
 
     return (
-        <section className={`mail ${read}`} onMouseOver={showNav} onMouseOut={removeNav} >
+        <section className={`mail ${read}`}  onMouseOver={showNav} onMouseOut={removeNav} >
             <span className="click-star">
                 <button><i className="fa-regular fa-star"></i></button>
             </span>

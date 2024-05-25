@@ -40,7 +40,7 @@ function query(filterBy = {}) {
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
         .then(mail => {
-            mail = _setNextPrevmailId(mail)
+            // mail = _setNextPrevmailId(mail)
             return mail
         })
 }

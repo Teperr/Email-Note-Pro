@@ -14,6 +14,7 @@ import { StarredPage } from "./apps/mail/views/StarredPage.jsx"
 import { SentPage } from "./apps/mail/views/sentPage.jsx"
 import { TrashPage } from "./apps/mail/views/trashPage.jsx"
 import { DraftsPage } from "./apps/mail/views/draftPage.jsx"
+import { MailDetails } from "./apps/mail/views/mailDeatails.jsx"
 
 
 export function App() {
@@ -25,7 +26,7 @@ export function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/mail" element={<MailIndex />} />
                 <Route path="/note" element={<NoteIndex />} />
-                
+
                 <Route path="/note/RemindersPage" element={<RemindersPage />} />
                 <Route path="/note/label" element={<LabelsPage />} />
                 <Route path="/note/archive" element={<ArchivesPage />} />
@@ -35,6 +36,7 @@ export function App() {
                 <Route path="/mail/sent" element={<SentPage />} />
                 <Route path="/mail/trash" element={<TrashPage />} />
                 <Route path="/mail/drafts" element={<DraftsPage />} />
+                <Route path="/mail/:mailId" element={<MailDetails />} />
 
             </Routes>
         </section>
