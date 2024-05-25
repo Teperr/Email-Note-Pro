@@ -27,3 +27,12 @@
 .none{
     display: none;
 }
+.read-mail {
+    background-color:#f2f6fc;
+}
+.read-mail *{
+    background-color:#f2f6fc;
+}
+.read-mail nav button{
+    background-color:#f2f6fc; 
+}

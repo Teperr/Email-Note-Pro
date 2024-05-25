@@ -7,7 +7,7 @@
 
     min-width: 85vw;
 
-    background-color: #fdfdfd;
+    /* background-color: #fdfdfd; */
     border: solid gainsboro 1px;
     opacity: 0.8;
 }
@@ -48,6 +48,7 @@
 .hover-nav-mail {
 
     margin-right: 1em;
+    margin-top: 0.1vh;
  
     height: 100%;
 

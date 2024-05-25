@@ -5,19 +5,29 @@ export function MailPreview({ mail }) {
 
     const date = useRef()
     date.current = (mail.sentAt.year < 2024)
-     ? mail.sentAt.year : mail.sentAt.month + ' ' + utilService.padNum(mail.sentAt.day)
+        ? mail.sentAt.year : mail.sentAt.month + ' ' + utilService.padNum(mail.sentAt.day)
 
-const [hover,setHover]=useState('none')
+    const [read, setRead] = useState('')
+    function readMail() {
+        setRead(prevRead => {
+            const cls = prevRead ? '' : 'read-mail'
+            console.log(cls);
+            return cls
+        })
+    }
 
-     function showNav(){
+    const [hover, setHover] = useState('none')
+
+    function showNav() {
         setHover('show')
-     }
-     function removeNav(){
+    }
+    function removeNav() {
         setHover('none')
-     }
+    }
+
 
     return (
-        <section className="mail"   onMouseOver={showNav} onMouseOut={removeNav} >
+        <section className={`mail ${read}`} onMouseOver={showNav} onMouseOut={removeNav} >
             <span className="click-star">
                 <button><i className="fa-regular fa-star"></i></button>
             </span>
@@ -38,9 +48,9 @@ const [hover,setHover]=useState('none')
             <dialog className={`hover-nav-mail ${hover} `}>
                 <form method="dialog">
                     <nav>
-                        <a title="trash" href="#"><i className="fa-regular fa-trash-can"></i></a>
-                        <a href="#"><i className="fa-regular fa-envelope-open"></i></a>
-                        <a href="#"><i className="fa-solid fa-file-arrow-down"></i></a>
+                        <button title="trash" href="#"><i className="fa-regular fa-trash-can"></i></button>
+                        <button onClick={readMail} title="pin as read" href="#"><i className="fa-regular fa-envelope-open"></i></button>
+                        <button title="move to drafts" href="#"><i className="fa-solid fa-file-arrow-down"></i></button>
                     </nav>
                 </form>
             </dialog>
