@@ -72,7 +72,8 @@ function _createMails() {
                 isRead: false,
                 sentAt: {
                     month:utilService.getMonthName(new Date().getMonth()),
-                    day:new Date().getDate()
+                    day:new Date().getDate(),
+                    year:new Date().getFullYear()
                 },
                 removedAt: null,
                 from:utilService.makeLorem(1)+'@gmail.com',
@@ -81,6 +82,21 @@ function _createMails() {
 
             mails.push(mail)
         }
+        const newmail={
+            id: utilService.makeId(5),
+                subject: utilService.makeLorem(3),
+                body: utilService.makeLorem(15),
+                isRead: false,
+                sentAt: {
+                    month:utilService.getMonthName(new Date().getMonth()),
+                    day:new Date().getDate(),
+                    year:2022
+                },
+                removedAt: null,
+                from:utilService.makeLorem(1)+'@gmail.com',
+                to: loggedinUser.email
+        }
+        mails.push(newmail)
         utilService.saveToStorage(MAIL_KEY, mails)
         console.log('mails', mails)
     }

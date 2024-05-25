@@ -21,3 +21,9 @@
 .grid {
     display: grid;
 }
+.show{
+    display: block;
+}
+.none{
+    display: none;
+}
