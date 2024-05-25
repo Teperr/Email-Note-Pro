@@ -8,10 +8,20 @@ export function NotePreview({ note }) {
 
     const [type, setType] = useState('photo1')
 
-    const [isOpen, setIsOpen] = useState(false)
-    const openClass = isOpen ? '' : '' //display-block
+    // const [isOpen, setIsOpen] = useState(false)
+    // const openClass = isOpen ? '' : '' //display-block
 
-    return <article className="note-article" onMouseOver={() => setIsOpen(prevIsOpen => !prevIsOpen)}>
+    const [hover, setHover] = useState('none')
+
+    function showNav() {
+        setHover('show')
+    }
+    
+    function removeNav() {
+        setHover('none')
+    }
+
+    return <article className="note-article" onMouseOver={showNav} onMouseOut={removeNav}>
         
         {type === 'photo' && <NoteImg />}
         <NoteTxt title={note.info.title} txt={note.info.txt}/>
@@ -20,7 +30,7 @@ export function NotePreview({ note }) {
 
 
         {/* //buttons-list */}
-        <section className={`buttons-list ${openClass}`}>
+        <section className={`buttons-list ${hover}`}>
             <span><button className="pin-note-icon"><i class="fa-solid fa-thumbtack"></i></button></span>
             <span><button className="background-color-icon"><i class="fa-solid fa-palette"></i></button></span>
             <span><button className="background-add-image-icon"><i class="fa-regular fa-image"></i></button></span>

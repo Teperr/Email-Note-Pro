@@ -2,7 +2,7 @@ const { useState } = React
 
 export function Accordion() {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState('')
 
     const openClass = isOpen ? 'open' : ''
 
@@ -16,9 +16,24 @@ export function Accordion() {
         // setFilterByToEdit(prevFilter => ({ ...prevFilter, [name]: type === 'number' ? +target.value : target.value }))
     }
 
+
+    function onClickOutOfAccordion(ev) {
+        // console.log('ev:', ev)
+        // console.log('ev.target:', ev.target)
+
+        if (ev.target.name === 'title') setIsOpen('open')
+        // else if (!ev.target.name) setIsOpen('')
+
+    }
+
+    function onCloseAccordion(){
+        console.log('hi:')
+        setIsOpen('')
+    }
+
     return (
-        <section className={`accordion ${openClass}`}>
-            <section onClick={() => setIsOpen(prevIsOpen => !prevIsOpen)} className="title-container">
+        <section className={`accordion ${isOpen}`} onClick={onClickOutOfAccordion} onBlur={onCloseAccordion}>
+            <section className="title-container">
 
                 <input
                     onChange={handleChange}

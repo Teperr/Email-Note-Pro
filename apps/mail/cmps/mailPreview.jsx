@@ -21,6 +21,7 @@ export function MailPreview({ mail }) {
     function showNav() {
         setHover('show')
     }
+    
     function removeNav() {
         setHover('none')
     }
