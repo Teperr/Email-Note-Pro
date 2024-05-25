@@ -123,3 +123,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.show{
+    opacity: 1;
+}
+
+.none{
+    opacity: 0;
+}
