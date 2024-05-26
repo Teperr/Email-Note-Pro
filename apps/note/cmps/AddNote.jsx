@@ -3,17 +3,14 @@ const { useState, useEffect, useRef } = React
 import { noteService } from '../../note/services/note.service.js'
 const { useNavigate } = ReactRouter
 
-
-
-
-export function AddNote() {
+export function AddNote({ onSave }) {
     const [note, setNote] = useState(noteService.getEmptyNote())
     console.log('note:', note)
 
-    const [isOpen, setIsOpen] = useState('');
-    const formRef = useRef(null);
+    const [isOpen, setIsOpen] = useState('')
+    const formRef = useRef(null)
 
-    const openClass = isOpen ? 'open' : '';
+    const openClass = isOpen ? 'open' : ''
 
 
     const navigate = useNavigate()
@@ -36,40 +33,23 @@ export function AddNote() {
         }))
     }
 
-    // function handleChangeTxtArea({ target }) {
-    //     const { type, name: prop } = target
-    //     let { value } = target
-
-    //     setNote(prevNote => ({
-    //         ...prevNote, info: {
-    //             ...prevNote.info, txt: value
-    //         }
-    //     }))
-
-    //     // setNote(prevNote => ({ ...prevNote.info, txt: value }))
-    // }
-
     function onOpen(ev) {
-        if (ev.target.name === 'title') setIsOpen('open');
+        if (ev.target.name === 'title') setIsOpen('open')
     }
 
     function onClose(ev) {
+        ev.preventDefault()
         // Check if the new focus is outside the form
         if (formRef.current && !formRef.current.contains(ev.relatedTarget)) {
-            setIsOpen('');
-            onSave(ev)
+            setIsOpen('')
+            onSave(note)
+
+            formRef.current.reset()
+            setNote(noteService.getEmptyNote())
+
+            console.log('ready to send to note index:', note)
 
         }
-    }
-
-    function onSave(ev) {
-        ev.preventDefault()
-        noteService.save(note)
-            .then(() => navigate('/note'))
-            .catch(() => {
-                alert('Couldnt save')
-                navigate('/note')
-            })
     }
 
     return (
@@ -80,8 +60,6 @@ export function AddNote() {
             onBlur={onClose}
         >
             <section className="title-container">
-
-
                 <input
                     onChange={handleChangeTitle}
                     onClick={onOpen}
@@ -103,6 +81,7 @@ export function AddNote() {
                 </div>
 
             </section>
+
             <section className="content">
 
                 <textarea
@@ -117,5 +96,5 @@ export function AddNote() {
             </section>
 
         </form>
-    );
+    )
 }

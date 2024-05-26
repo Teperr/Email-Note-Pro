@@ -1,4 +1,5 @@
 const { useState, useEffect } = React
+const { useParams, useNavigate } = ReactRouter
 
 import { noteService } from '../services/note.service.js'
 
@@ -11,6 +12,10 @@ import { AddNote } from '../cmps/AddNote.jsx';
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    const [note, setNote] = useState({})
+
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         noteService.query()
@@ -22,8 +27,24 @@ export function NoteIndex() {
 
 
 
-    }, [])
+    }, [note]) //[notes] for infinity loop
 
+
+
+
+    function onSave({ ...addNote }) {
+        console.log('addNote onSave NoteIndex:', addNote)
+        setNote(addNote)
+        noteService.save(addNote)
+            .then(() => {
+                navigate('/note')
+                console.log(' save in storage')
+            })
+            .catch(() => {
+                alert('Couldnt save')
+                navigate('/note')
+            })
+    }
 
 
 
@@ -35,7 +56,7 @@ export function NoteIndex() {
             <NoteHeader />
 
             <section className='accordion-continer'>
-                <AddNote title="Title..." >
+                <AddNote title="Title..." onSave={onSave}>
                     <p>🍎</p>
 
                 </AddNote>

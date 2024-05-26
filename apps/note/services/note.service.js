@@ -20,6 +20,7 @@ export const noteService = {
 function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
+            console.log('NOTE_KEY :', notes)
             // if (filterBy.title) {
             //     // console.log('filterBy:', filterBy)
             //     const regExp = new RegExp(filterBy.title, 'i')
