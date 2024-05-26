@@ -4,7 +4,7 @@ import { NoteImg } from '../cmps/NoteImg.jsx'
 
 
 export function NotePreview({ note }) {
-    console.log('note NotePreview:', note)
+    // console.log('note NotePreview:', note)
 
     const [type, setType] = useState('photo1')
 
@@ -31,11 +31,11 @@ export function NotePreview({ note }) {
 
         {/* //buttons-list */}
         <section className={`buttons-list ${hover}`}>
-            <span><button className="pin-note-icon"><i class="fa-solid fa-thumbtack"></i></button></span>
-            <span><button className="background-color-icon"><i class="fa-solid fa-palette"></i></button></span>
-            <span><button className="background-add-image-icon"><i class="fa-regular fa-image"></i></button></span>
-            <span><button className="background-add-Archive-icon"><i class="fa-solid fa-bell"></i></button></span>
-            <span><button className="remove-note-icon"><i class="fa-regular fa-trash-can"></i></button></span>
+            <span><button className="pin-note-icon"><i className="fa-solid fa-thumbtack"></i></button></span>
+            <span><button className="background-color-icon"><i className="fa-solid fa-palette"></i></button></span>
+            <span><button className="background-add-image-icon"><i className="fa-regular fa-image"></i></button></span>
+            <span><button className="background-add-Archive-icon"><i className="fa-solid fa-bell"></i></button></span>
+            <span><button className="remove-note-icon"><i className="fa-regular fa-trash-can"></i></button></span>
         </section>
 
 

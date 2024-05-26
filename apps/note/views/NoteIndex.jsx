@@ -5,7 +5,7 @@ import { noteService } from '../services/note.service.js'
 import { MenuOptions } from '../cmps/MenuOptions.jsx'
 import { NoteHeader } from '../cmps/NoteHeader.jsx'
 import { NotesPage } from '../views/NotesPage.jsx'
-import { Accordion } from '../cmps/TxtNoteAccordion.jsx';
+import { AddNote } from '../cmps/AddNote.jsx';
 
 
 
@@ -25,16 +25,20 @@ export function NoteIndex() {
     }, [])
 
 
+
+
+
+
     // if (!notes)return <h1>loading..</h1>
     return <section>
         <div className="main-container">
             <NoteHeader />
 
             <section className='accordion-continer'>
-                <Accordion title="Title..." >
+                <AddNote title="Title..." >
                     <p>🍎</p>
 
-                </Accordion>
+                </AddNote>
             </section>
             <main className="main-content">
                 <MenuOptions />

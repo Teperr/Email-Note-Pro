@@ -1,4 +1,4 @@
-import { Accordion } from '../cmps/TxtNoteAccordion.jsx';
+import { Accordion } from './AddNote.jsx';
 
 
 export function NoteHeader() {

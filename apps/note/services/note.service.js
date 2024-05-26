@@ -85,8 +85,8 @@ function _createNote(type) {
     return note
 }
 
-function getEmptyNote(type = '',createdAt = '',  isPinned = '', style = { backgroundColor: '' }, info = { title: 'Title', txt: 'Text...' }) {
-    return {createdAt, type, isPinned, style, info }
+function getEmptyNote(id = '', type = '', createdAt = '', isPinned = '', style = { backgroundColor: '' }, info = { title: '', txt: '' }) {
+    return { id, createdAt, type, isPinned, style, info }
 }
 
 

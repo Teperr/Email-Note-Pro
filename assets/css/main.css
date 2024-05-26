@@ -31,7 +31,7 @@
 @import './cmps/AppHeader.css';
 @import './cmps/NoteIndex.css';
 @import './cmps/MenuOptions.css';
-@import './cmps/Accordion.css';
+@import './cmps/AddNote.css';
 @import './cmps/NoteList.jsx';
 @import './cmps/NotePreview.css';
 
