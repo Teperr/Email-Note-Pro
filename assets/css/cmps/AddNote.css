@@ -140,3 +140,17 @@
 
 
 
+
+/* tablet */
+/* @media (width >= 601px) {
+
+
+} */
+
+/* mobail */
+@media (width <= 600px) {
+    .accordion-continer{
+        display: none;
+    }
+  
+}

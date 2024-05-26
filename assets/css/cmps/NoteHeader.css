@@ -1,0 +1,50 @@
+
+/* tablet */
+@media (width >=601px) {
+
+    .mail-header form input {
+        width: 40em;
+
+
+    }
+}
+
+/* mobail */
+
+@media (width <=600px) {
+
+    .mail-header form input {
+        width: 15em;
+
+
+    }
+    .mail-header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mail-header h2 {
+        font-size: 1.2em;
+        margin-inline-start: 0.3em;
+    }
+}
+
+@media (width <=400px) {
+
+    .mail-header form input {
+        width: 13em;
+
+
+    }
+    .mail-header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mail-header h2 {
+        font-size: 1em;
+        margin-inline-start: 0.3em;
+    }
+}

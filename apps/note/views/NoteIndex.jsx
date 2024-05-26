@@ -45,6 +45,10 @@ export function NoteIndex() {
             });
     }
 
+    function onBgColor(noteId){
+        console.log('noteId:', noteId)
+    }
+
     return (
         <section>
             <div className="main-container">
@@ -56,7 +60,7 @@ export function NoteIndex() {
                 </section>
                 <main className="main-content">
                     <MenuOptions />
-                    <NotesPage notes={notes} onRemove={onRemove} />
+                    <NotesPage notes={notes} onRemove={onRemove}  onBgColor={onBgColor}/>
                 </main>
                 <div className="footer">Footer</div>
             </div>

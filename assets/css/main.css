@@ -34,5 +34,6 @@
 @import './cmps/AddNote.css';
 @import './cmps/NoteList.jsx';
 @import './cmps/NotePreview.css';
+@import './cmps/NoteHeader.css';
 
 /* @import './apps/mail/cmps/MailList.css'; */

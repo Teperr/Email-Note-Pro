@@ -12,6 +12,9 @@
 
 }
 
+
+
+
 .note-preview li article {
     position: relative;
     border: 1px solid #5f636837;
@@ -28,7 +31,7 @@
 
 
 
-.note-preview li article:hover{
+.note-preview li article:hover {
     border: 1px solid #5f6368be;
     box-shadow: 2px 2px 4px 0px #5f6368be;
     transition: 0.6s;
@@ -132,10 +135,121 @@
     align-items: center;
 }
 
-.show{
+.show {
     opacity: 1;
 }
 
-.none{
+.none {
     opacity: 0;
+}
+
+
+/* tablet */
+/* @media (width >=601px) {
+
+    .note-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        justify-content: center;
+        gap: 10px;
+
+        margin: 10px;
+        padding: 1em;
+
+        border: 1px solid #5f636837;
+        list-style: none;
+
+        border: 1px solid rgb(21, 167, 53);
+
+    }
+} */
+
+/* mobail */
+@media (width <=600px) {
+
+    .note-preview {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(50px, 1fr));
+        justify-content: center;
+        gap: 10px;
+
+        margin: 0.5em;
+        /* padding: 1em; */
+
+        border: 1px solid #5f636837;
+        list-style: none;
+
+        /* background-color: rgb(109, 11, 44);
+        border: 1px solid rgb(240, 226, 29);
+     */
+    }
+
+    .note-preview li article {
+        position: relative;
+        border: 1px solid #5f636837;
+        box-shadow: 1.5px 1.5px 1px 0px #5f636837;
+        
+        /* min-width: 100px; */
+        max-width: 180px;
+        border-radius: 0.5em;
+        padding: 0.5em;
+        
+        
+    
+    
+    }
+
+    .note-preview li article p {
+        padding-block-end: 0px;
+
+    }
+
+    .buttons-list {
+        display: none;
+    }
+}
+
+/* mini mobile */
+@media (width <=400px) {
+
+    .note-preview {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(50px, 1fr));
+        justify-content: center;
+        gap: 10px;
+
+        margin: 0.5em;
+        /* padding: 1em; */
+
+        border: 1px solid #5f636837;
+        list-style: none;
+
+        /* background-color: rgb(109, 11, 44);
+        border: 1px solid rgb(240, 226, 29);
+     */
+    }
+
+    .note-preview li article {
+        position: relative;
+        border: 1px solid #5f636837;
+        box-shadow: 1.5px 1.5px 1px 0px #5f636837;
+        
+        /* min-width: 100px; */
+        max-width: 165px;
+        border-radius: 0.5em;
+        padding: 0.5em;
+        
+        
+    
+    
+    }
+
+    .note-preview li article p {
+        padding-block-end: 0px;
+
+    }
+
+    .buttons-list {
+        display: none;
+    }
 }

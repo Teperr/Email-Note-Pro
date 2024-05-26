@@ -36,3 +36,20 @@
     background-color: rgb(254,239,195);
 
 }
+
+
+/* tablet */
+/* @media (width >= 601px) {
+
+
+} */
+
+/* mobail */
+@media (width <= 600px) {
+    .Menu-options {
+      display: none;
+    }
+    
+
+  
+}
