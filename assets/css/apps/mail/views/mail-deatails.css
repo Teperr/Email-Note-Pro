@@ -1,0 +1,33 @@
+
+ .mail-deatails-page .mail-details{
+    position: relative;
+min-width: 80vw;
+font-size: 2em;
+border: dashed gainsboro 5px;
+}   
+.mail-data{
+    display: grid;
+    gap: 2em;
+
+    justify-content: center;
+    justify-items: center;
+
+    margin-top:20vh;
+    margin-left: 0.5em;
+}
+
+.actions{
+    display: flex;
+    gap: 0.4em;
+    position: absolute;
+    right: 0.5em;
+    top: 0;
+
+}
+.actions button{
+    font-size: 0.5em;
+}
+.actions button:hover{
+    background-color: gainsboro;
+    transition: 0.4s;
+}

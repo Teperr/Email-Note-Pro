@@ -36,7 +36,12 @@ export function MailDetails() {
             })
     }
 
-
+function sentAsNote(){
+    console.log('as note');
+}
+function removeMail(){
+    console.log('remove the mail');
+}
     if (isLoading) return <h3>Loading...</h3>
     return (
         <section className="mail-deatails-page">
@@ -46,15 +51,17 @@ export function MailDetails() {
                     <MenuOptions />
                     <section className="mail-details">
                         <article className="mail-data">
-                            <h3>{mail.subject}</h3>
-                            <h5>{mail.from}</h5>
-                            <p>{mail.body}</p>
+                            <h3>Subject: {mail.subject}</h3>
+                            <span className="date-sent">sent at: {mail.sentAt.month} {mail.sentAt.day} <span>year:{mail.sentAt.year}</span></span>
+                            <h5>From: {mail.from}</h5>
+                            <p> Body: {mail.body}</p>
                         </article>
-                        {/* <section className="actions">
-                    <Link to={`/mail/${mail.prevMailId}`}><button>Prev</button></Link>
-                    <Link to={`/mail/${mail.nextMailId}`}><button>Next</button></Link>
-                    <Link to="/mail"><button><i className="fa-sharp fa-light fa-arrow-right"></i></button></Link>
-                </section> */}
+                        <section className="actions">
+                            <Link to="/mail"> <button onClick={sentAsNote}><i className="fa-solid fa-paper-plane"></i></button></Link>
+                            <Link to="/mail"><button onClick={removeMail}><i className="fa-regular fa-trash-can"></i></button></Link>
+                            <Link to="/mail/newMail"><button><i className="fa-solid fa-reply"></i></button></Link>
+                            <Link to="/mail/openMailPage"><button><i className="fa-solid fa-expand"></i></button></Link>
+                        </section>
 
                     </section>
                 </main>
