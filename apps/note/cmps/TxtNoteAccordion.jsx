@@ -32,7 +32,9 @@ export function Accordion() {
     }
 
     return (
-        <section className={`accordion ${isOpen}`} onClick={onClickOutOfAccordion} onBlur={onCloseAccordion}>
+        <section className={`accordion ${isOpen}`} onClick={onClickOutOfAccordion} >
+            
+
             <section className="title-container">
 
                 <input
@@ -51,11 +53,11 @@ export function Accordion() {
                 {/* <span className="arrow">⌄</span> */}
             </section>
 
-            <section className="content">
+            <section className="content" onBlur={onCloseAccordion}>
 
                 {/* {children} */}
 
-                <textarea name="textarea" rows="4" cols="50" onChange={handleChange} placeholder="New Note..."></textarea>
+                <textarea name="textarea" rows="4" cols="50" onChange={handleChange} placeholder="New Note..." autoFocus></textarea>
 
 
             </section>
