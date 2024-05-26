@@ -15,6 +15,7 @@ import { SentPage } from "./apps/mail/views/sentPage.jsx"
 import { TrashPage } from "./apps/mail/views/trashPage.jsx"
 import { DraftsPage } from "./apps/mail/views/draftPage.jsx"
 import { MailDetails } from "./apps/mail/views/mailDeatails.jsx"
+import { FullMainPage } from "./apps/mail/views/FullMainPage.jsx"
 
 
 export function App() {
@@ -37,6 +38,7 @@ export function App() {
                 <Route path="/mail/trash" element={<TrashPage />} />
                 <Route path="/mail/drafts" element={<DraftsPage />} />
                 <Route path="/mail/:mailId" element={<MailDetails />} />
+                <Route path="/mail/openMailPage" element={<FullMainPage />} />
 
             </Routes>
         </section>

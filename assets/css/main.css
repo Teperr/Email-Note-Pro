@@ -20,6 +20,7 @@
 /* mails-views */
 @import './apps/mail/views/MailIndex.css';
 @import './apps/mail/views/mail-pages.css';
+@import './apps/mail/views/mail-deatails.css';
 
 /* mailCmps */
 @import './apps/mail/cmps/mailHeader.css';
