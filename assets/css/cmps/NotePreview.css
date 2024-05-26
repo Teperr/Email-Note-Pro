@@ -58,7 +58,7 @@
 
 }
 
-.buttons-list span {
+.buttons-list section {
     margin-inline-start: 1px;
 
     padding: 0.3em;
@@ -68,15 +68,15 @@
 
 }
 
-.buttons-list span:hover {
+.buttons-list section:hover {
     background-color: #5f636837;
     cursor: pointer;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     transition: 0.1s;
 }
 
 
-.buttons-list span button {
+.buttons-list section span button {
     background-color: rgb(187, 174, 174);
     display: flex;
     justify-content: center;
@@ -88,7 +88,7 @@
     cursor: pointer;
 }
 
-.buttons-list span button i {
+.buttons-list section span button i {
     font-size: 12px;
 
 }

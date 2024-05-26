@@ -10,15 +10,18 @@
 
     /* background-color: red; */
     border: 1px solid black;
+    position: relative;
 }
 
 .note-article {
-    /* display: flex; */
+   
     /* border: 1px solid black;
     padding: 10px;
     min-width: 1000px; */
     /* background-color: red; */
     /* gap: 20px; */
+    /* position: relative; */
+    
 
 
 

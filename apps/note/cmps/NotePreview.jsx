@@ -2,6 +2,7 @@ const { useState } = React
 
 import { NoteTxt } from '../cmps/NoteTxt.jsx'
 import { NoteImg } from '../cmps/NoteImg.jsx'
+import { NoteBgColor } from '../cmps/NoteBgColor.jsx'
 
 export function NotePreview({ note, onRemove , onBgColor}) {
     // console.log('NotePreview received onRemove:', onRemove);
@@ -24,12 +25,13 @@ export function NotePreview({ note, onRemove , onBgColor}) {
 
             <section className={`buttons-list ${hover}`}>
                 
-                <span><button className="pin-note-icon"><i className="fa-solid fa-thumbtack"></i></button></span>
-                <span><button className="background-color-icon"  onClick={() => onBgColor(note.id)}><i className="fa-solid fa-palette"></i></button></span>
-                {/* < NoteBgColor /> */}
-                <span><button className="background-add-image-icon"><i className="fa-regular fa-image"></i></button></span>
-                <span><button className="background-add-Archive-icon"><i className="fa-solid fa-bell"></i></button></span>
-                <span><button className="remove-note-icon" onClick={() => onRemove(note.id)}><i className="fa-regular fa-trash-can"></i></button></span>
+            <section><span><button className="pin-note-icon"><i className="fa-solid fa-thumbtack"></i></button></span></section>
+                
+                < NoteBgColor note={note} onBgColor={onBgColor}/>
+                
+               <section> <span><button className="background-add-image-icon"><i className="fa-regular fa-image"></i></button></span></section>
+               <section><span><button className="background-add-Archive-icon"><i className="fa-solid fa-bell"></i></button></span></section>
+               <section><span><button className="remove-note-icon" onClick={() => onRemove(note.id)}><i className="fa-regular fa-trash-can"></i></button></span></section>
             </section>
         </article>
     );
