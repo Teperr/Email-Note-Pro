@@ -4,6 +4,12 @@ export function MenuOptions() {
     return <section className="Menu-options">
 
         <div className="list-container">
+            <Link to="/mail/newMail">
+                <span className="new-mail flex" >
+                <i className="fa-sharp fa-solid fa-pen"></i>
+            <button>New mail </button>
+                </span>
+            </Link>
 
             <Link to="/mail"><span>
             <i className="fa-solid fa-inbox"></i>
@@ -37,7 +43,7 @@ export function MenuOptions() {
                     <button>Drafts</button>
                 </span>
             </Link>
-            
+
         </div>
     </section>
 }

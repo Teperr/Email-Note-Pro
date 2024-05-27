@@ -1,6 +1,6 @@
 .Menu-options {
     min-width: 100px;
-    background-color: rgb(215, 215, 215);
+    background-color: #f6f8fc;
     flex-grow: 1;
 
 }
@@ -14,11 +14,14 @@
 }
 
 
-
+.list-container *{
+    margin-left: 0.5em;
+}
 .list-container span{
     padding: 1em;
 
 }
+
 
 .list-container span button {
 
@@ -33,6 +36,17 @@
 }
 
 .list-container span:hover {
-    background-color: rgb(254,239,195);
-
+    background-color:gainsboro;
+}
+.list-container .new-mail{
+        background-color: #c2e7ff;
+        border-radius: 10%;
+        width:60%
+}
+.new-mail{
+    justify-content: center;
+}
+ .list-container .new-mail:hover{
+    background-color: #c2e7ff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
