@@ -22,6 +22,24 @@ useEffect(() => {
 
 
 }, [])
+function removeMail(){
+    console.log('remove the mail');
+    
+        setIsLoading(true)
+        mailService.remove(mailId)
+            .then(() => {
+                // utilService.animateCSS('fadeAway')
+                //     .then(() => setMails(prevMails => prevMails.filter(mail => mail.id !== mailId)))
+                setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
+                showSuccessMsg(`Mail (${mailId}) removed successfully!`)
+            })
+            .catch(err => {
+                console.log('err:', err)
+                showErrorMsg('There was a problem')
+            })
+            .finally(() => setIsLoading(false))
+    
+}
 
     return (
     <section>
@@ -30,7 +48,7 @@ useEffect(() => {
 
             <main className="main-content">
                 <MenuOptions />
-                <MailPages mails={mails}/>
+                <MailPages mails={mails} onRemove={removeMail}/>
             </main>
         </div>
     </section>

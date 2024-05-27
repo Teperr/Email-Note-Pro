@@ -2,31 +2,49 @@
     position: relative;
 
     display: flex;
-    gap: 1.5em;
+    /* gap: 1.5em; */
     align-items: center;
 
     min-width: 85vw;
+    max-height: fit-content;
 
     /* background-color: #fdfdfd; */
     border: solid gainsboro 1px;
     opacity: 0.8;
 }
 
+
 .mail:hover {
     box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
     opacity: 1;
     cursor: pointer;
 }
+.mail *{
+    margin: 0.5em;
+}
 
 .mail .mail-name {
-    position: absolute;
-    left: 30vw;
-    top: 0.7vh;
+width: 10vw;
 }
 
 
 .mail .mail-subject {
-    margin-top: 0.7vh;
+    /* margin-top: 0.7vh;
+    margin-left: 17vw; */
+    margin-left: 10vw;
+    width: 10vw;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    
+}
+.mail .mail-body{
+    /* max-width: 30vw;
+    max-height:1.35em; */
+    width: 30vw;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .mail button {
@@ -45,17 +63,10 @@
     top: 0.7vh;
 }
 
-.hover-nav-mail {
+.mail nav{
+    position: absolute;
+    right: 1em;
+    top: 0.7vh;
 
-    margin-right: 1em;
-    margin-top: 0.1vh;
- 
-    height: 100%;
-
-    border: solid 0px;
 }
 
-.hover-nav-mail form nav a:hover {
-    background-color: gainsboro;
-    border-radius: 50%;
-}

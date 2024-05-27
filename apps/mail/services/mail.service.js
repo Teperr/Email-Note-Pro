@@ -64,6 +64,7 @@ function _createMails() {
         mails = []
 
         for (let i = 0; i < 6; i++) {
+            var userName=utilService.makeLorem(1)
             const mail =
             {
                 id: utilService.makeId(5),
@@ -76,27 +77,14 @@ function _createMails() {
                     year:new Date().getFullYear()
                 },
                 removedAt: null,
-                from:utilService.makeLorem(1)+'@gmail.com',
-                to: loggedinUser.email
+                from:userName+'@gmail.com',
+                to: loggedinUser.email,
+                name:userName,
             }
 
             mails.push(mail)
         }
-        const newmail={
-            id: utilService.makeId(5),
-                subject: utilService.makeLorem(3),
-                body: utilService.makeLorem(15),
-                isRead: false,
-                sentAt: {
-                    month:utilService.getMonthName(new Date().getMonth()),
-                    day:new Date().getDate(),
-                    year:2022
-                },
-                removedAt: null,
-                from:utilService.makeLorem(1)+'@gmail.com',
-                to: loggedinUser.email
-        }
-        mails.push(newmail)
+        
         utilService.saveToStorage(MAIL_KEY, mails)
         console.log('mails', mails)
     }

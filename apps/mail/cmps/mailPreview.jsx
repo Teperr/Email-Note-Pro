@@ -17,13 +17,16 @@ export function MailPreview({ mail }) {
     }
 
     const [hover, setHover] = useState('none')
+    const[hoverTohide,setHoverTohide]=useState('show')
 
     function showNav() {
         setHover('show')
+        setHoverTohide('none')
     }
     
     function removeNav() {
         setHover('none')
+        setHoverTohide('show')
     }
 
 
@@ -33,28 +36,30 @@ export function MailPreview({ mail }) {
                 <button><i className="fa-regular fa-star"></i></button>
             </span>
 
-            <p className="mail-name">
-                {mail.from}
-            </p>
+            <span className="mail-name">
+                {mail.name}
+            </span>
 
-            <p className="mail-subject">
+            <span className="mail-subject ">
                 {mail.subject}
-            </p>
+            </span>
+            <span className="mail-body">
+               -{mail.body}
+            </span>
 
-            <span className="mail-date">
+            <span className={`mail-date ${hoverTohide}`}>
                 {date.current}
             </span>
 
 
-            <dialog className={`hover-nav-mail ${hover} `}>
-                <form method="dialog">
-                    <nav>
-                        <button title="trash" href="#"><i className="fa-regular fa-trash-can"></i></button>
+            {/* <dialog className={`hover-nav-mail ${hover} `}> */}
+                    <nav className={hover}>
+                        <button  title="trash" href="#"><i className="fa-regular fa-trash-can"></i></button>
                         <button onClick={readMail} title="pin as read" href="#"><i className="fa-regular fa-envelope-open"></i></button>
                         <button title="move to drafts" href="#"><i className="fa-solid fa-file-arrow-down"></i></button>
                     </nav>
-                </form>
-            </dialog>
+                
+            {/* </dialog> */}
         </section>
     )
 }
