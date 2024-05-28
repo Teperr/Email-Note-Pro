@@ -40,7 +40,7 @@ function query(filterBy = {}) {
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
         .then(note => {
-            note = _setNextPrevNoteId(note)
+            // note = _setNextPrevNoteId(note)
             return note
         })
 }
@@ -86,7 +86,7 @@ function _createNote(type) {
     return note
 }
 
-function getEmptyNote(id = '', type = '', createdAt = '', isPinned = '', style = { backgroundColor: '' }, info = { title: '', txt: '' }) {
+function getEmptyNote(id = '', type = '', createdAt = '', isPinned = false, style = { backgroundColor: '' }, info = { title: '', txt: '' },) {
     return { id, createdAt, type, isPinned, style, info }
 }
 

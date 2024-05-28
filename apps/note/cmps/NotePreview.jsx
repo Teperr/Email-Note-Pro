@@ -1,11 +1,29 @@
-const { useState } = React
+const { useState, useEffect } = React
 
 import { NoteTxt } from '../cmps/NoteTxt.jsx'
 import { NoteImg } from '../cmps/NoteImg.jsx'
 import { NoteBgColor } from '../cmps/NoteBgColor.jsx'
+import { noteService } from '../services/note.service.js'
 
-export function NotePreview({ note, onRemove , onBgColor}) {
+export function NotePreview({ note, onRemove }) {
     // console.log('NotePreview received onRemove:', onRemove);
+    // const [isLoading, setIsLoading] = useState(true)
+    const [bgColor, setBgColor] = useState('#fff');
+    // const [pinNote, setPinNote] = useState([]);
+
+
+    // useEffect(() => {
+    //     if (note && note.info) {
+    //         setIsLoading(false);
+    //     }
+    // }, [note])
+
+    if (!note || !note.info) {
+        return <div>Loading...</div>
+    }
+    
+    // console.log('note:', note.id)
+    // console.log('note.info.title:', note.info.txt)
 
     const [type, setType] = useState('photo1');
     const [hover, setHover] = useState('none');
@@ -18,8 +36,20 @@ export function NotePreview({ note, onRemove , onBgColor}) {
         setHover('none');
     }
 
+    function onBgColor(noteId, bgColor) {
+        console.log('noteId:', noteId)
+        console.log('bgColor:', bgColor)
+        setBgColor(bgColor)
+        // noteService.save(newNote)
+        console.log('note:', note)
+        
+
+    }
+   
+
+
     return (
-        <article className="note-article" onMouseOver={showNav} onMouseOut={unShowNav}>
+        <article className="note-article" onMouseOver={showNav} onMouseOut={unShowNav} style={{ backgroundColor: `${bgColor}` }}>
             {type === 'photo' && <NoteImg />}
             <NoteTxt title={note.info.title} txt={note.info.txt} />
 

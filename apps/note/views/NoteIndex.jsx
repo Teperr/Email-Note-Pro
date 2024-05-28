@@ -8,8 +8,12 @@ import { NoteHeader } from '../cmps/NoteHeader.jsx'
 import { NotesPage } from '../views/NotesPage.jsx'
 import { AddNote } from '../cmps/AddNote.jsx'
 
+
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    // const [noteToEdit, setNoteToEdit] = useState({})
+    // const [bgColor, setBgColor] = useState('#fff');
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -45,8 +49,14 @@ export function NoteIndex() {
             });
     }
 
-    function onBgColor(noteId){
+    function onBgColor(noteId, bgColor) {
         console.log('noteId:', noteId)
+        console.log('bgColor:', bgColor)
+        // setNoteToEdit()
+
+
+
+
     }
 
     return (
@@ -58,9 +68,12 @@ export function NoteIndex() {
                         <p>🍎</p>
                     </AddNote>
                 </section>
+                {/* <header className='pin-note'>
+                </header> */}
                 <main className="main-content">
                     <MenuOptions />
-                    <NotesPage notes={notes} onRemove={onRemove}  onBgColor={onBgColor}/>
+                    {/* <PinNote /> */}
+                    <NotesPage notes={notes} onRemove={onRemove} onBgColor={onBgColor} />
                 </main>
                 <div className="footer">Footer</div>
             </div>
