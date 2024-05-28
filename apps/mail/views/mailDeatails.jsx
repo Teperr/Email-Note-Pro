@@ -9,9 +9,11 @@ import { showErrorMsg, showUserMsg } from "../../../services/event-bus.service.j
 import { MailHeader } from "../cmps/mailAppHeader.jsx"
 import { MenuOptions } from "../cmps/menuOptionsMail.jsx"
 
+
 export function MailDetails() {
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [pinAsRead,setPinAsRead]=useState("-open")
 
     const params = useParams()
     const navigate = useNavigate()
@@ -26,6 +28,8 @@ export function MailDetails() {
         mailService.get(params.mailId)
             .then(mail => {
                 setMail(mail)
+                
+
             })
             .catch(() => {
                 showErrorMsg('Couldnt get mail...')
@@ -42,6 +46,15 @@ function sentAsNote(){
 function removeMail(){
     console.log('remove mail');
 }
+
+function unReadMail(){
+    console.log(params.mailId);
+    mailService.makeReadtoUnRead(params.mailId)
+    .then( updateMail=>console.log(updateMail.isRead) )
+}
+
+    // setPinAsRead(previcon=>previcon= previcon ? '':'-open')
+
 
     if (isLoading) return <h3>Loading...</h3>
     return (
@@ -62,7 +75,8 @@ function removeMail(){
                             <Link to="/mail"><button title="remove Mail" onClick={removeMail}><i className="fa-regular fa-trash-can"></i></button></Link>
                             <Link to="/mail/newMail"><  button title ="replay email" ><i className="fa-solid fa-reply"></i></button></Link>
                             <Link to="/mail/openMailPage"><button title="full page"><i className="fa-solid fa-expand"></i></button></Link>
-                            <Link to="/mail"><button title="Exit"><i className="fa-solid fa-arrow-right"></i></button></Link>
+                            <Link to="/mail" ><button onClick={unReadMail} title="pin as unread"><i className={`fa-regular fa-envelope`}></i></button></Link>
+                            <Link to="/mail"  ><button title="Exit"><i className="fa-solid fa-arrow-right"></i></button></Link>
                         </section>
 
                     </section>
