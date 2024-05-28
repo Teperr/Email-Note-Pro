@@ -52,6 +52,7 @@ export function AddNote({ onSave }) {
         }
     }
 
+  
     return (
         <form
             className={`accordion ${openClass}`}
