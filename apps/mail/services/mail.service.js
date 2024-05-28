@@ -13,6 +13,7 @@ export const mailService = {
     get,
     remove,
     save,
+    readMail,
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -55,6 +56,13 @@ function save(mail) {
     } else {
         return storageService.post(MAIL_KEY, mail)
     }
+}
+function readMail(mailId){
+    return storageService.get(MAIL_KEY, mailId)
+    .then( mail =>{
+      if(!mail.isRead)mail.isRead=!mail.isRead
+   return   save(mail)
+} )
 }
 
 function _createMails() {
