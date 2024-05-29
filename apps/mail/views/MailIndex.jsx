@@ -6,6 +6,7 @@ import { MailHeader } from "../cmps/mailAppHeader.jsx"
 import { MenuOptions } from "../cmps/menuOptionsMail.jsx"
 import { MailPages } from "./mailPages.jsx"
 import { EmailCompose } from "../cmps/EmailCompose.jsx"
+import { EmailFilter } from "../cmps/EmailFilter.jsx"
 
 export function MailIndex() {
     const params = useParams()
@@ -14,13 +15,11 @@ export function MailIndex() {
     const [isLoading, setIsLoading] = useState(true)
     const [mails, setMails] = useState([])
     const [unReadCounter, setUnReadCounter] = useState(0)
-
+    const [filterBy, setFilterBy] = useState({ body: '' })
 
 
     useEffect(() => {
-        setIsLoading(true)
-        const timeoutId = setTimeout(() => {
-            mailService.query()
+            mailService.query(filterBy)
                 .then(mails => {
                     setMails(mails)
                     console.log('mails:', mails)
@@ -28,20 +27,12 @@ export function MailIndex() {
                     setUnReadCounter(filterUnreadsMails.length)
                     console.log('filterUnreadsMails:', filterUnreadsMails);
                 })
-                .catch(err => {
-                    console.log('err:', err)
-                    showErrorMsg('There was a problem')
-                })
-                .finally(() => setIsLoading(false))
+      
+    }, [filterBy])
 
-        }, 1300);
-
-        return () => {
-
-            clearTimeout(timeoutId)
-        }
-
-    }, [])
+    function OnsetFilterBy(newFilter) {
+        setFilterBy(newFilter)
+    }
 
     function removeMail() {
         console.log('remove the mail');
@@ -61,17 +52,17 @@ export function MailIndex() {
             .finally(() => setIsLoading(false))
 
     }
-    if (isLoading) return <h3>Loading...</h3>
+    // if (isLoading) return <h3>Loading...</h3>
     return (
         <section>
             <div className="main-container">
-                <MailHeader />
+                <EmailFilter filterBy={filterBy} onFilter={OnsetFilterBy} />
 
                 <main className="main-content">
                     <MenuOptions unReadCounter={unReadCounter} />
                     <MailPages mails={mails} onRemove={removeMail} />
                 </main>
-                <EmailCompose />
+                {/* <EmailCompose /> */}
             </div>
         </section>
 
