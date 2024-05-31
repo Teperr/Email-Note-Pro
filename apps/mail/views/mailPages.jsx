@@ -13,7 +13,7 @@ export function MailPages({ mails, onRemove }) {
             <ul className="mail-preview">
                 {mails.map(mail =>
                     <li key={mail.id} >
-                        <Link to={`/mail/${mail.id}`} ><MailPreview  isRead={mail.isRead} mail={mail} renderGoldStar={mail.isStar}  /></Link>
+                        <Link to={`/mail/${mail.id}`} ><MailPreview  isTrash={mail.isTrash} isRead={mail.isRead} mail={mail} renderGoldStar={mail.isStar}  /></Link>
                     </li>)}
             </ul>
         </section>

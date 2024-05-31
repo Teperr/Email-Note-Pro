@@ -39,6 +39,8 @@ export function App() {
                 <Route path="/mail/drafts" element={<DraftsPage />} />
                 <Route path="/mail/:mailId" element={<MailDetails />} />
                 <Route path="/mail/openMailPage" element={<FullMainPage />} />
+              
+
 
             </Routes>
         </section>

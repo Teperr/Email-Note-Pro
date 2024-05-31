@@ -2,29 +2,30 @@ const { Link } = ReactRouterDOM
 const { useState, useEffect,useRef } = React
 
 const { useParams, useNavigate } = ReactRouter
+import { eventBusService, showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
-import { EmailCompose } from "./EmailCompose.jsx"
 export function MenuOptions({unReadCounter}) {
     
    
     
     const [mail, setMail] = useState(mailService.getSentEmptyMail())
     const [show,setShow]=useState('none')
-    
+
     const params = useParams()
     const navigate = useNavigate()
-
     function onSave(ev) {
         ev.preventDefault()
         console.log('send is clicked');
         mailService.save(mail)
+        .then(()=>{
+            navigate('/mail/sent')
+        } )
             .catch(() => {
                 alert('Couldnt save')
                 navigate('/mail')
             })
-            console.log('send?');
     }
 
     function handleChange({ target }) {

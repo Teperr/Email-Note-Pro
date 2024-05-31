@@ -20,10 +20,10 @@ export function MailIndex() {
 
     useEffect(() => {
             mailService.query(filterBy)
-                .then(mails => {
-                    setMails(mails)
-                    console.log('mails:', mails)
-                    var filterUnreadsMails = mails.filter(mail => (!mail.isRead))
+                .then(mails => { const inboxMails=mails.filter((mail)=>!mail.isSent&& !mail.isTrash)
+                    setMails(inboxMails)
+                    console.log('inboxMails:',inboxMails )
+                    var filterUnreadsMails = inboxMails.filter(mail => (!mail.isRead))
                     setUnReadCounter(filterUnreadsMails.length)
                     console.log('filterUnreadsMails:', filterUnreadsMails);
                 })

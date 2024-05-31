@@ -15,6 +15,7 @@ onFilter(filterMails)
         setFilterMailsBy(prevFilterMails => ({ ...prevFilterMails, [name]: value }))
     }
     return (
+
         <section className="mail-header">
             <MailHeader/>
         <form >
