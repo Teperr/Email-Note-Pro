@@ -21,6 +21,9 @@
 .grid {
     display: grid;
 }
+.star{
+    color: gold;
+}
 .show{
     display: block;
 }
@@ -35,4 +38,10 @@
 }
 .read-mail nav button{
     background-color:#f2f6fc; 
+}
+.bold{
+    font-weight: bold;
+}
+.compose-header{
+    background-color:#f2f6fc ;
 }

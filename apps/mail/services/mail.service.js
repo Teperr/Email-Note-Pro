@@ -25,6 +25,7 @@ export const mailService = {
     readMail,
     makeReadtoUnRead,
     getEmptyMail,
+    toggleStarData,
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -106,6 +107,7 @@ function _createMails() {
                 from: userName + '@gmail.com',
                 to: loggedinUser.email,
                 name: userName,
+                isStar:false
             }
 
             mails.push(mail)
@@ -133,4 +135,10 @@ function getEmptyMail(subject = '', to = '', body = '') {
         name:loggedinUser.fullname,
     }
     return mail
+}
+
+function toggleStarData(mailId){
+  return  storageService.get(MAIL_KEY,mailId)
+  .then(mail => { mail.isStar= !mail.isStar
+    return save(mail) } )
 }
