@@ -30,6 +30,39 @@
 .none{
     display: none;
 }
+
+.trash{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    counter-reset: none;
+    
+   
+}
+.trash a{
+    pointer-events: none;
+}
+.trash *{
+    width: 0;
+    height: 0;
+    opacity: 0;  
+    pointer-events: none;
+}
+.trash:hover{
+    width: 0;
+    height: 0;
+    opacity: 0; 
+    pointer-events: none;
+    
+}
+
+.trash .mail-date{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none; 
+}
 .read-mail {
     background-color:#f2f6fc;
 }

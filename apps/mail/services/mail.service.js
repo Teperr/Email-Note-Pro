@@ -2,13 +2,13 @@
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
-const criteria = { 
-    status: 'inbox/sent/trash/draft', 
+const criteria = {
+    status: 'inbox/sent/trash/draft',
     txt: 'puki', // no need to support complex text search 
     isRead: true,   // (optional property, if missing: show all) 
     isStared: true, // (optional property, if missing: show all) 
     lables: ['important', 'romantic'] // has any of the labels 
-    } 
+}
 
 const loggedinUser = {
     email: 'IdanElfasi60167@gmail.com',
@@ -24,8 +24,9 @@ export const mailService = {
     save,
     readMail,
     makeReadtoUnRead,
-    getEmptyMail,
+    getSentEmptyMail,
     toggleStarData,
+    updateTrashMails,
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -107,20 +108,23 @@ function _createMails() {
                 from: userName + '@gmail.com',
                 to: loggedinUser.email,
                 name: userName,
-                isStar:false
+                isStar: false,
+                isSent: false,
+                isTrash: false
             }
 
             mails.push(mail)
-        }
 
+        }
         utilService.saveToStorage(MAIL_KEY, mails)
         console.log('mails', mails)
     }
 }
 
-function getEmptyMail(subject = '', to = '', body = '') {
+
+function getSentEmptyMail(subject = '', to = '', body = '') {
     const mail = {
-        id:'',
+        id: '',
         subject,
         body,
         isRead: false,
@@ -132,13 +136,26 @@ function getEmptyMail(subject = '', to = '', body = '') {
         removedAt: null,
         from: loggedinUser.email,
         to,
-        name:loggedinUser.fullname,
+        name: loggedinUser.fullname,
+        isStar: false,
+        isSent: true,
+        isTrash: false
     }
     return mail
 }
 
-function toggleStarData(mailId){
-  return  storageService.get(MAIL_KEY,mailId)
-  .then(mail => { mail.isStar= !mail.isStar
-    return save(mail) } )
+function toggleStarData(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+        .then(mail => {
+            mail.isStar = !mail.isStar
+            return save(mail)
+        })
+}
+
+function updateTrashMails(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+        .then(mail => {
+            mail.isTrash = !mail.isTrash
+            return save(mail)
+        })
 }

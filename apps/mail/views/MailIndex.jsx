@@ -16,6 +16,7 @@ export function MailIndex() {
     const [mails, setMails] = useState([])
     const [unReadCounter, setUnReadCounter] = useState(0)
     const [filterBy, setFilterBy] = useState({ body: '' })
+    
 
 
     useEffect(() => {
@@ -34,10 +35,8 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
-    function removeMail() {
+    function removeMail(mailId) {
         console.log('remove the mail');
-
-        setIsLoading(true)
         mailService.remove(mailId)
             .then(() => {
                 // utilService.animateCSS('fadeAway')
@@ -52,6 +51,9 @@ export function MailIndex() {
             .finally(() => setIsLoading(false))
 
     }
+ function updateNumUnreadByRemoveMail(){
+    setUnReadCounter(prevUnread=>prevUnread-1)
+ }
     // if (isLoading) return <h3>Loading...</h3>
     return (
         <section>
@@ -59,8 +61,8 @@ export function MailIndex() {
                 <EmailFilter filterBy={filterBy} onFilter={OnsetFilterBy} />
 
                 <main className="main-content">
-                    <MenuOptions unReadCounter={unReadCounter} />
-                    <MailPages mails={mails} onRemove={removeMail} />
+                    <MenuOptions  unReadCounter={unReadCounter} />
+                    <MailPages updateUnRead={updateNumUnreadByRemoveMail} mails={mails} onRemove={removeMail} />
                 </main>
                 {/* <EmailCompose /> */}
             </div>

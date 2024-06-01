@@ -2,8 +2,7 @@ const { useState, useEffect, useRef } = React
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailPreview({ mail,renderGoldStar }) {
-
+export function MailPreview({ mail,renderGoldStar,remove,removeListItem,index ,updateUnreadAfterDelete}) {
     const date = useRef()
     date.current = (mail.sentAt.year < 2024)
         ? mail.sentAt.year : mail.sentAt.month + ' ' + utilService.padNum(mail.sentAt.day)
@@ -11,6 +10,7 @@ export function MailPreview({ mail,renderGoldStar }) {
     const [read, setRead] = useState('')
 
     const [isStar, setIsStar] = useState(renderGoldStar)
+    const [isTrash,setIsTrash] = useState('')
     const  starCls = useRef('')
 
     const isBold = useRef('bold')
@@ -25,11 +25,15 @@ export function MailPreview({ mail,renderGoldStar }) {
 
     }, [])
     function readMailClick(ev) {
-        ev.preventDefault()
-        ev.stopPropagation()
+        // ev.preventDefault()
+        // ev.stopPropagation()
         console.log(mail);
         mailService.readMail(mail.id)
-            .then(updateReadMail => console.log(updateReadMail.isRead))
+            .then(updateReadMail => {
+
+                const pinRead = updateReadMail.isRead ? 'read-mail' : ''
+                setRead(pinRead)
+            })
     }
 
 
@@ -60,7 +64,12 @@ export function MailPreview({ mail,renderGoldStar }) {
     function removeMail(ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        console.log(ev);
+        mailService.updateTrashMails(mail.id)
+        .then(updateMail => {
+        console.log(updateMail);
+            setIsTrash('trash')
+        updateUnreadAfterDelete()})
+          
     }
 
     function toggleStar(ev) {
@@ -75,7 +84,7 @@ export function MailPreview({ mail,renderGoldStar }) {
     }
      starCls.current = (isStar) ? 'star' : ''
     return (
-        <section className={`mail ${read} `} onClick={readMailClick} onMouseOver={showNav} onMouseOut={removeNav} >
+        <section className={`mail ${read} ${isTrash} `} onClick={readMailClick} onMouseOver={showNav} onMouseOut={removeNav} >
             <span onClick={toggleStar} className={`click-star`}>
                 <button ><i className={`fa-regular fa-star  ${starCls.current} `}></i></button>
             </span>
