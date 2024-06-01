@@ -1,14 +1,28 @@
 const { Link } = ReactRouterDOM
+const { useState, useEffect,useRef } = React
+
 import { MailPreview } from "../cmps/mailPreview.jsx"
 
-export function MailPages({ mails }) {
 
+export function MailPages({ mails,updateUnRead,isTrash,realRemove ,folder }) {
+    console.log(folder);
+  
+    function realRemoveMail(mailId){
+        realRemove(mailId)
+    }
+function unReadUpdateNum(){
+    updateUnRead()
+}
+   
     return (
         <section className="mail-list">
             <ul className="mail-preview">
-                {mails.map(mail =>
+                {mails.map((mail,idx) =>
                     <li key={mail.id} >
-                        <Link to={`/mail/${mail.id}`}><MailPreview mail={mail} /></Link>
+
+  <Link to={`/mail/${mail.id}/${folder}`} ><MailPreview outFromStorage={realRemoveMail} isTrashPage={isTrash} updateUnreadAfterDelete={unReadUpdateNum}  
+     isTrash={mail.isTrash} isRead={mail.isRead} mail={mail} renderGoldStar={mail.isStar}  /></Link>
+
                     </li>)}
             </ul>
         </section>

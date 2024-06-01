@@ -11,6 +11,7 @@
 
 }
 
+
 .mail-header form input,
 button {
     background-color: #eaf1fb;
@@ -46,15 +47,6 @@ button {
     outline: none;
 }
 
-.mail-header h2 {
-    margin: 0;
-}
-
-.mail-header h2 #text,
-i {
-    margin-top: 0.5em
-}
-.mail-header button:hover{
-    background-color: gainsboro;
-    transition: 0.2s;
+.mail-header .header-buttons{
+    gap: 1em;
 }

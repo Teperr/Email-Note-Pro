@@ -2,10 +2,19 @@
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
-const loggedinUser = { 
-    email: 'IdanElfasi60167@gmail.com',  
-    fullname: 'Idan Elfasi' 
-    }
+const criteria = {
+    status: 'inbox/sent/trash/draft',
+    txt: 'puki', // no need to support complex text search 
+    isRead: true,   // (optional property, if missing: show all) 
+    isStared: true, // (optional property, if missing: show all) 
+    lables: ['important', 'romantic'] // has any of the labels 
+}
+
+const loggedinUser = {
+    email: 'IdanElfasi60167@gmail.com',
+    fullname: 'Idan Elfasi'
+}
+
 const MAIL_KEY = 'mailDB'
 _createMails()
 export const mailService = {
@@ -13,6 +22,11 @@ export const mailService = {
     get,
     remove,
     save,
+    readMail,
+    makeReadtoUnRead,
+    getSentEmptyMail,
+    toggleStarData,
+    updateTrashMails,
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -22,14 +36,14 @@ function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
 
-            if (filterBy.title) {
-                const regExp = new RegExp(filterBy.title, 'i')
-                mails = mails.filter(mail => regExp.test(mail.title))
+            if (filterBy.body) {
+                const regExp = new RegExp(filterBy.body, 'i')
+                mails = mails.filter(mail => regExp.test(mail.body))
             }
 
-            if (filterBy.price) {
-                mails = mails.filter(mail => mail.listPrice.amount >= filterBy.price)
-            }
+            // if (filterBy.price) {
+            //     mails = mails.filter(mail => mail.listPrice.amount >= filterBy.price)
+            // }
 
             return mails
         })
@@ -56,6 +70,20 @@ function save(mail) {
         return storageService.post(MAIL_KEY, mail)
     }
 }
+function readMail(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+        .then(mail => {
+            if (!mail.isRead) mail.isRead = !mail.isRead
+            return save(mail)
+        })
+}
+function makeReadtoUnRead(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+        .then(mail => {
+            if (mail.isRead) mail.isRead = false
+            return save(mail)
+        })
+}
 
 function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
@@ -64,6 +92,7 @@ function _createMails() {
         mails = []
 
         for (let i = 0; i < 6; i++) {
+            var userName = utilService.makeLorem(1)
             const mail =
             {
                 id: utilService.makeId(5),
@@ -71,33 +100,62 @@ function _createMails() {
                 body: utilService.makeLorem(15),
                 isRead: false,
                 sentAt: {
-                    month:utilService.getMonthName(new Date().getMonth()),
-                    day:new Date().getDate(),
-                    year:new Date().getFullYear()
+                    month: utilService.getMonthName(new Date().getMonth()),
+                    day: new Date().getDate(),
+                    year: new Date().getFullYear()
                 },
                 removedAt: null,
-                from:utilService.makeLorem(1)+'@gmail.com',
-                to: loggedinUser.email
+                from: userName + '@gmail.com',
+                to: loggedinUser.email,
+                name: userName,
+                isStar: false,
+                isSent: false,
+                isTrash: false
             }
 
             mails.push(mail)
+
         }
-        const newmail={
-            id: utilService.makeId(5),
-                subject: utilService.makeLorem(3),
-                body: utilService.makeLorem(15),
-                isRead: false,
-                sentAt: {
-                    month:utilService.getMonthName(new Date().getMonth()),
-                    day:new Date().getDate(),
-                    year:2022
-                },
-                removedAt: null,
-                from:utilService.makeLorem(1)+'@gmail.com',
-                to: loggedinUser.email
-        }
-        mails.push(newmail)
         utilService.saveToStorage(MAIL_KEY, mails)
         console.log('mails', mails)
     }
+}
+
+
+function getSentEmptyMail(subject = '', to = '', body = '') {
+    const mail = {
+        id: '',
+        subject,
+        body,
+        isRead: false,
+        sentAt: {
+            month: utilService.getMonthName(new Date().getMonth()),
+            day: new Date().getDate(),
+            year: new Date().getFullYear()
+        },
+        removedAt: null,
+        from: loggedinUser.email,
+        to,
+        name: loggedinUser.fullname,
+        isStar: false,
+        isSent: true,
+        isTrash: false
+    }
+    return mail
+}
+
+function toggleStarData(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+        .then(mail => {
+            mail.isStar = !mail.isStar
+            return save(mail)
+        })
+}
+
+function updateTrashMails(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+        .then(mail => {
+            mail.isTrash = !mail.isTrash
+            return save(mail)
+        })
 }

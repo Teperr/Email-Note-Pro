@@ -1,6 +1,6 @@
 .Menu-options {
     min-width: 100px;
-    background-color: rgb(215, 215, 215);
+    background-color: #f6f8fc;
     flex-grow: 1;
 
 }
@@ -14,11 +14,14 @@
 }
 
 
-
+.list-container *{
+    margin-left: 0.5em;
+}
 .list-container span{
     padding: 1em;
 
 }
+
 
 .list-container span button {
 
@@ -33,18 +36,27 @@
 }
 
 .list-container span:hover {
-    background-color: rgb(254,239,195);
-
+    background-color:gainsboro;
 }
-
-
-/* tablet */
-/* @media (width >= 601px) {
-
-
+.list-container .new-mail{
+        background-color: #c2e7ff;
+        border-radius: 10%;
+        max-width: 10vw;
+}
+.new-mail{
+    justify-content: start;
+}
+ .list-container .new-mail:hover{
+    background-color: #c2e7ff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+/* .mail-data{
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   opacity: 1;
 } */
 
-/* mobail */
 @media (width <= 600px) {
     .Menu-options {
       display: none;

@@ -9,9 +9,12 @@ import { showErrorMsg, showUserMsg } from "../../../services/event-bus.service.j
 import { MailHeader } from "../cmps/mailAppHeader.jsx"
 import { MenuOptions } from "../cmps/menuOptionsMail.jsx"
 
+
 export function MailDetails() {
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [pinAsRead,setPinAsRead]=useState("-open")
+    const [isTrash, setIsTrash] = useState('')
 
     const params = useParams()
     const navigate = useNavigate()
@@ -26,6 +29,8 @@ export function MailDetails() {
         mailService.get(params.mailId)
             .then(mail => {
                 setMail(mail)
+                
+
             })
             .catch(() => {
                 showErrorMsg('Couldnt get mail...')
@@ -40,8 +45,30 @@ function sentAsNote(){
     console.log('as note');
 }
 function removeMail(){
-    console.log('remove the mail');
+    console.log('remove mail');
+    ev.preventDefault()
+        ev.stopPropagation()
+        // if (isTrashPage === 'trash-page') {
+        //     outFromStorage(params.mailId)
+        // }
+        // else {
+            mailService.updateTrashMails(params.mailId)
+                // .then(updateMail => {
+                //     console.log(updateMail);
+                //     setIsTrash('trash')
+                // })
+        // }
 }
+
+function unReadMail(){
+    console.log(params.mailId);
+    mailService.makeReadtoUnRead(params.mailId)
+    .then( updateMail=>console.log(updateMail.isRead) )
+}
+
+    // setPinAsRead(previcon=>previcon= previcon ? '':'-open')
+
+
     if (isLoading) return <h3>Loading...</h3>
     return (
         <section className="mail-deatails-page">
@@ -57,10 +84,12 @@ function removeMail(){
                             <p> Body: {mail.body}</p>
                         </article>
                         <section className="actions">
-                            <Link to="/mail"> <button onClick={sentAsNote}><i className="fa-solid fa-paper-plane"></i></button></Link>
-                            <Link to="/mail"><button onClick={removeMail}><i className="fa-regular fa-trash-can"></i></button></Link>
-                            <Link to="/mail/newMail"><button><i className="fa-solid fa-reply"></i></button></Link>
-                            <Link to="/mail/openMailPage"><button><i className="fa-solid fa-expand"></i></button></Link>
+                            <Link to="/mail"> <button title="Save as note" onClick={sentAsNote}><i className="fa-solid fa-paper-plane"></i></button></Link>
+                            <Link to={`/mail/${params.folderName}`}><button title="remove Mail" onClick={removeMail}><i className="fa-regular fa-trash-can"></i></button></Link>
+                            <Link to="/mail/newMail"><  button title ="replay email" ><i className="fa-solid fa-reply"></i></button></Link>
+                            {/* <Link to="/mail/openMailPage"><button title="full page"><i className="fa-solid fa-expand"></i></button></Link> */}
+                            <Link to="/mail" ><button onClick={unReadMail} title="pin as unread"><i className={`fa-regular fa-envelope`}></i></button></Link>
+                            <Link to={`/mail/${params.folderName}`}  ><button title="Exit"><i className="fa-solid fa-arrow-right"></i></button></Link>
                         </section>
 
                     </section>
