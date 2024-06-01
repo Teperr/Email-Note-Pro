@@ -98,7 +98,6 @@ export function MenuOptions({ unReadCounter }) {
                     <button>Drafts</button>
                 </span>
             </Link>
-            {/* { show &&<EmailCompose  isShow={show} />} */}
             <form onSubmit={onSave} className={`mail-data  ${show} `}>
                 <nav className="header-new-mail compose-header">
                     <h3>New mail </h3>

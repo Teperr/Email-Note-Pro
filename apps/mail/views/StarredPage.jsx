@@ -35,7 +35,7 @@ const [starMails,setStarMails]=useState([])
 
             <main className="main-content">
                 <MenuOptions />
-                <MailPages mails={starMails} />
+                <MailPages mails={starMails} folder={'starred'} />
             </main>
         </div>
     </section>

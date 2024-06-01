@@ -26,6 +26,7 @@ export function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/mail" element={<MailIndex />} />
+                <Route path="/mail/mail" element={<MailIndex />} />
                 <Route path="/note" element={<NoteIndex />} />
 
                 <Route path="/note/RemindersPage" element={<RemindersPage />} />
@@ -36,8 +37,9 @@ export function App() {
                 <Route path="/mail/starred" element={<StarredPage />} />
                 <Route path="/mail/sent" element={<SentPage />} />
                 <Route path="/mail/trash/:isTrash" element={<TrashPage />} />
+                <Route path="/mail/trash" element={<TrashPage />} />
                 <Route path="/mail/drafts" element={<DraftsPage />} />
-                <Route path="/mail/:mailId" element={<MailDetails />} />
+                <Route path="/mail/:mailId/:folderName" element={<MailDetails />} />
                 <Route path="/mail/openMailPage" element={<FullMainPage />} />
               
 

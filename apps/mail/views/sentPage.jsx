@@ -36,7 +36,7 @@ export function SentPage(){
     
                 <main className="main-content">
                     <MenuOptions />
-                    <MailPages mails={sentMails} />
+                    <MailPages folder={'sent'} mails={sentMails} />
                 </main>
             </div>
         </section>

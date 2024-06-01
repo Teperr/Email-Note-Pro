@@ -49,7 +49,7 @@ export function TrashPage(){
 
                 <main className="main-content">
                     <MenuOptions />
-                    <MailPages realRemove={removeMailFromStorage} isTrash={params.isTrash}  mails={trashMails} />
+                    <MailPages  folder={'trash'} realRemove={removeMailFromStorage} isTrash={params.isTrash}  mails={trashMails} />
                 </main>
             </div>
         </section>

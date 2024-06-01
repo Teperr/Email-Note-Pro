@@ -2,7 +2,7 @@ const { useState, useEffect, useRef } = React
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isTrashPage, outFromStorage }) {
+export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isTrashPage, outFromStorage, }) {
     const date = useRef()
     date.current = (mail.sentAt.year < 2024)
         ? mail.sentAt.year : mail.sentAt.month + ' ' + utilService.padNum(mail.sentAt.day)

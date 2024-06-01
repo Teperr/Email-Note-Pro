@@ -45,7 +45,7 @@ export function MailIndex() {
 
                 <main className="main-content">
                     <MenuOptions  unReadCounter={unReadCounter} />
-                    <MailPages updateUnRead={updateNumUnreadByRemoveMail} mails={mails}  />
+                    <MailPages updateUnRead={updateNumUnreadByRemoveMail} mails={mails} folder={'mail'}  />
                 </main>
             </div>
         </section>

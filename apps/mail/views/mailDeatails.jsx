@@ -14,6 +14,7 @@ export function MailDetails() {
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [pinAsRead,setPinAsRead]=useState("-open")
+    const [isTrash, setIsTrash] = useState('')
 
     const params = useParams()
     const navigate = useNavigate()
@@ -45,6 +46,19 @@ function sentAsNote(){
 }
 function removeMail(){
     console.log('remove mail');
+    ev.preventDefault()
+        ev.stopPropagation()
+        // if (isTrashPage === 'trash-page') {
+        //     outFromStorage(params.mailId)
+        // }
+        // else {
+            mailService.updateTrashMails(params.mailId)
+                .then(updateMail => {
+                    console.log(updateMail);
+                    setIsTrash('trash')
+                    navigate()
+                })
+        // }
 }
 
 function unReadMail(){
@@ -76,7 +90,7 @@ function unReadMail(){
                             <Link to="/mail/newMail"><  button title ="replay email" ><i className="fa-solid fa-reply"></i></button></Link>
                             <Link to="/mail/openMailPage"><button title="full page"><i className="fa-solid fa-expand"></i></button></Link>
                             <Link to="/mail" ><button onClick={unReadMail} title="pin as unread"><i className={`fa-regular fa-envelope`}></i></button></Link>
-                            <Link to="/mail"  ><button title="Exit"><i className="fa-solid fa-arrow-right"></i></button></Link>
+                            <Link to={`/mail/${params.folderName}`}  ><button title="Exit"><i className="fa-solid fa-arrow-right"></i></button></Link>
                         </section>
 
                     </section>
