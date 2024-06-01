@@ -76,3 +76,10 @@
 .compose-header{
     background-color:#f2f6fc ;
 }
+
+.img-size{
+    width: 100px;
+    height: 100px;
+    z-index: 10;
+    
+}

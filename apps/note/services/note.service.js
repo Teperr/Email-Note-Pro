@@ -11,6 +11,7 @@ export const noteService = {
     remove, // REMOVE
     save, // 
     getEmptyNote,
+    bgColorNote,
     // getDefaultFilter,
     // getSpeedStats,
     // getVendorStats,
@@ -35,6 +36,20 @@ function query(filterBy = {}) {
 
             return notes
         })
+}
+
+
+function bgColorNote(noteId, color) {
+    console.log('noteId:', noteId)
+    console.log('color:', color)
+    return storageService.get(NOTE_KEY, noteId)
+        .then(note => {
+            note.style.backgroundColor = color
+            return save(note)
+        })
+
+
+
 }
 
 function get(noteId) {
