@@ -1,17 +1,17 @@
-import { Accordion } from '../cmps/TxtNoteAccordion.jsx';
 
 
 export function NoteHeader() {
-    return <header className="header">
-        <h1>Notes</h1>
-        <button className="toggle-menu-btn" type="button">☰</button>
+    return (
+        <section className="mail-header">
+            <button><i className="fa-solid fa-book"></i></button>
 
-        {/* <Accordion title="כותרת" children='ipsum'>
-            <p>Lorem ipsum</p>
+            <h2> Note Keep <i className="fa-solid fa-envelope"></i></h2>
+            
+            <form >
+            <input type="text" placeholder="search..." />
+             <button><i className="fa-brands fa-searchengin"></i></button>
+            </form>
 
-
-        </Accordion> */}
-        {/* style={{ marginBlock: '50px' }} */}
-      
-    </header>
+        </section>
+    )
 }

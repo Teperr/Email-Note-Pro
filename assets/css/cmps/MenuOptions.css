@@ -56,3 +56,12 @@
    bottom: 0;
    opacity: 1;
 } */
+
+@media (width <= 600px) {
+    .Menu-options {
+      display: none;
+    }
+    
+
+  
+}

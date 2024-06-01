@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     font-family: "Roboto", sans-serif;
+    
 }
 
 .accordion {
@@ -89,6 +90,7 @@
     margin-inline: 1em;
     height: 40px;
     font-size: 14px;
+    padding: 0px;
 
     background: none;
 	color: inherit;
@@ -107,7 +109,8 @@
 }
 
 .accordion .content {
-    padding-block: .5em;
+    /* padding-block: 2.5em; */
+    padding: 0px;
     display: none;
     
 }
@@ -124,7 +127,7 @@
 
 .accordion.open .content textarea {
     display: block;
-    padding: 0.8em;
+    /* padding: 0.8em; */
     font-family: "Roboto", sans-serif;
     font-size: 15px;
     background: none;
@@ -137,3 +140,17 @@
 
 
 
+
+/* tablet */
+/* @media (width >= 601px) {
+
+
+} */
+
+/* mobail */
+@media (width <= 600px) {
+    .accordion-continer{
+        display: none;
+    }
+  
+}

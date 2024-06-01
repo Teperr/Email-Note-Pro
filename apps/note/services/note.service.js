@@ -20,6 +20,7 @@ export const noteService = {
 function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
+            console.log('NOTE_KEY :', notes)
             // if (filterBy.title) {
             //     // console.log('filterBy:', filterBy)
             //     const regExp = new RegExp(filterBy.title, 'i')
@@ -39,7 +40,7 @@ function query(filterBy = {}) {
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
         .then(note => {
-            note = _setNextPrevNoteId(note)
+            // note = _setNextPrevNoteId(note)
             return note
         })
 }
@@ -85,8 +86,8 @@ function _createNote(type) {
     return note
 }
 
-function getEmptyNote(type = '',createdAt = '',  isPinned = '', style = { backgroundColor: '' }, info = { title: 'Title', txt: 'Text...' }) {
-    return {createdAt, type, isPinned, style, info }
+function getEmptyNote(id = '', type = '', createdAt = '', isPinned = false, style = { backgroundColor: '' }, info = { title: '', txt: '' },) {
+    return { id, createdAt, type, isPinned, style, info }
 }
 
 

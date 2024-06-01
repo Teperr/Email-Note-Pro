@@ -1,46 +1,68 @@
-const { useState } = React
+const { useState, useEffect } = React
+
 import { NoteTxt } from '../cmps/NoteTxt.jsx'
 import { NoteImg } from '../cmps/NoteImg.jsx'
+import { NoteBgColor } from '../cmps/NoteBgColor.jsx'
+import { noteService } from '../services/note.service.js'
+
+export function NotePreview({ note, onRemove }) {
+    // console.log('NotePreview received onRemove:', onRemove);
+    // const [isLoading, setIsLoading] = useState(true)
+    const [bgColor, setBgColor] = useState('#fff');
+    // const [pinNote, setPinNote] = useState([]);
 
 
-export function NotePreview({ note }) {
-    console.log('note NotePreview:', note)
+    // useEffect(() => {
+    //     if (note && note.info) {
+    //         setIsLoading(false);
+    //     }
+    // }, [note])
 
-    const [type, setType] = useState('photo1')
-
-    // const [isOpen, setIsOpen] = useState(false)
-    // const openClass = isOpen ? '' : '' //display-block
-
-    const [hover, setHover] = useState('none')
-
-    function showNav() {
-        setHover('show')
+    if (!note || !note.info) {
+        return <div>Loading...</div>
     }
     
-    function removeNav() {
-        setHover('none')
+    // console.log('note:', note.id)
+    // console.log('note.info.title:', note.info.txt)
+
+    const [type, setType] = useState('photo1');
+    const [hover, setHover] = useState('none');
+
+    function showNav() {
+        setHover('show');
     }
 
-    return <article className="note-article" onMouseOver={showNav} onMouseOut={removeNav}>
+    function unShowNav() {
+        setHover('none');
+    }
+
+    function onBgColor(noteId, bgColor) {
+        console.log('noteId:', noteId)
+        console.log('bgColor:', bgColor)
+        setBgColor(bgColor)
+        // noteService.save(newNote)
+        console.log('note:', note)
         
-        {type === 'photo' && <NoteImg />}
-        <NoteTxt title={note.info.title} txt={note.info.txt}/>
+
+    }
+   
 
 
+    return (
+        <article className="note-article" onMouseOver={showNav} onMouseOut={unShowNav} style={{ backgroundColor: `${bgColor}` }}>
+            {type === 'photo' && <NoteImg />}
+            <NoteTxt title={note.info.title} txt={note.info.txt} />
 
-
-        {/* //buttons-list */}
-        <section className={`buttons-list ${hover}`}>
-            <span><button className="pin-note-icon"><i class="fa-solid fa-thumbtack"></i></button></span>
-            <span><button className="background-color-icon"><i class="fa-solid fa-palette"></i></button></span>
-            <span><button className="background-add-image-icon"><i class="fa-regular fa-image"></i></button></span>
-            <span><button className="background-add-Archive-icon"><i class="fa-solid fa-bell"></i></button></span>
-            <span><button className="remove-note-icon"><i class="fa-regular fa-trash-can"></i></button></span>
-        </section>
-
-
-        {/* <p>{notes.maxSpeed} km/h</p> */}
-        {/* <img src={`../assets/img/${car.vendor}.png`} alt={car.vendor + ' image'} /> */}
-    </article>
-
+            <section className={`buttons-list ${hover}`}>
+                
+            <section><span><button className="pin-note-icon"><i className="fa-solid fa-thumbtack"></i></button></span></section>
+                
+                < NoteBgColor note={note} onBgColor={onBgColor}/>
+                
+               <section> <span><button className="background-add-image-icon"><i className="fa-regular fa-image"></i></button></span></section>
+               <section><span><button className="background-add-Archive-icon"><i className="fa-solid fa-bell"></i></button></span></section>
+               <section><span><button className="remove-note-icon" onClick={() => onRemove(note.id)}><i className="fa-regular fa-trash-can"></i></button></span></section>
+            </section>
+        </article>
+    );
 }

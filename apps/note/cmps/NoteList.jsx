@@ -1,15 +1,20 @@
 import { NotePreview } from '../cmps/NotePreview.jsx'
 
-export function NoteList({ notes }) {
-    console.log('notes NoteList:', notes)
-    console.log('notes.id:', notes.id)
-    return <section className="note-list">
-        <ul className="note-preview">
-            {notes.map(note =>
-                <li key={note.id} >
-                    <NotePreview note={note} />
+export function NoteList({ notes, onRemove , onBgColor}) {
+    // console.log('NoteList received onRemove:', onRemove)
+    console.log('notes:', notes)
+    
 
-                </li>)}
-        </ul>
-    </section>
+    return (
+        <section className="note-list">
+            <ul className="note-preview">
+                {notes.map(note => (
+                    
+                    <li key={note.id}>
+                        <NotePreview note={note} onRemove={onRemove} onBgColor={onBgColor} />
+                    </li>
+                ))}
+            </ul>
+        </section>
+    )
 }
