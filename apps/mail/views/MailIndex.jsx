@@ -35,26 +35,9 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
-    function removeMail(mailId) {
-        console.log('remove the mail');
-        mailService.remove(mailId)
-            .then(() => {
-                // utilService.animateCSS('fadeAway')
-                //     .then(() => setMails(prevMails => prevMails.filter(mail => mail.id !== mailId)))
-                setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
-                showSuccessMsg(`Mail (${mailId}) removed successfully!`)
-            })
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('There was a problem')
-            })
-            .finally(() => setIsLoading(false))
-
-    }
  function updateNumUnreadByRemoveMail(){
     setUnReadCounter(prevUnread=>prevUnread-1)
  }
-    // if (isLoading) return <h3>Loading...</h3>
     return (
         <section>
             <div className="main-container">
@@ -62,9 +45,8 @@ export function MailIndex() {
 
                 <main className="main-content">
                     <MenuOptions  unReadCounter={unReadCounter} />
-                    <MailPages updateUnRead={updateNumUnreadByRemoveMail} mails={mails} onRemove={removeMail} />
+                    <MailPages updateUnRead={updateNumUnreadByRemoveMail} mails={mails}  />
                 </main>
-                {/* <EmailCompose /> */}
             </div>
         </section>
 

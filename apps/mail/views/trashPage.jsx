@@ -11,6 +11,8 @@ import { EmailFilter } from "../cmps/EmailFilter.jsx"
 export function TrashPage(){
     const [filterBy, setFilterBy] = useState({ body: '' })
     const [trashMails,setTrashMails]=useState([])
+    const params=useParams()
+    console.log(params);
 
     useEffect(() => {
         mailService.query(filterBy)
@@ -26,6 +28,19 @@ export function TrashPage(){
     function OnsetFilterBy(newFilter) {
         setFilterBy(newFilter)
     }
+
+    function removeMailFromStorage(mailId) {
+        console.log('remove the mail from storage ');
+        mailService.remove(mailId)
+            .then(() => {
+                setTrashMails(prevTrashMails => prevTrashMails.filter(mail => mail.id !== mailId))
+            })
+            .catch(err => {
+                console.log('err:', err)
+            })
+           
+
+    }
     return (
         <section>
             <div className="main-container">
@@ -34,7 +49,7 @@ export function TrashPage(){
 
                 <main className="main-content">
                     <MenuOptions />
-                    <MailPages mails={trashMails} />
+                    <MailPages realRemove={removeMailFromStorage} isTrash={params.isTrash}  mails={trashMails} />
                 </main>
             </div>
         </section>

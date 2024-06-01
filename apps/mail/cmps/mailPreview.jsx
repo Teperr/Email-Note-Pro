@@ -2,7 +2,7 @@ const { useState, useEffect, useRef } = React
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailPreview({ mail,renderGoldStar,remove,removeListItem,index ,updateUnreadAfterDelete}) {
+export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isTrashPage, outFromStorage }) {
     const date = useRef()
     date.current = (mail.sentAt.year < 2024)
         ? mail.sentAt.year : mail.sentAt.month + ' ' + utilService.padNum(mail.sentAt.day)
@@ -10,8 +10,8 @@ export function MailPreview({ mail,renderGoldStar,remove,removeListItem,index ,u
     const [read, setRead] = useState('')
 
     const [isStar, setIsStar] = useState(renderGoldStar)
-    const [isTrash,setIsTrash] = useState('')
-    const  starCls = useRef('')
+    const [isTrash, setIsTrash] = useState('')
+    const starCls = useRef('')
 
     const isBold = useRef('bold')
 
@@ -64,12 +64,18 @@ export function MailPreview({ mail,renderGoldStar,remove,removeListItem,index ,u
     function removeMail(ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        mailService.updateTrashMails(mail.id)
-        .then(updateMail => {
-        console.log(updateMail);
-            setIsTrash('trash')
-        updateUnreadAfterDelete()})
-          
+        if (isTrashPage === 'trash-page') {
+            outFromStorage(mail.id)
+        }
+        else {
+            mailService.updateTrashMails(mail.id)
+                .then(updateMail => {
+                    console.log(updateMail);
+                    setIsTrash('trash')
+                    updateUnreadAfterDelete()
+                })
+        }
+
     }
 
     function toggleStar(ev) {
@@ -78,11 +84,12 @@ export function MailPreview({ mail,renderGoldStar,remove,removeListItem,index ,u
         console.log('starClicked');
         mailService.toggleStarData(mail.id)
             .then(updateMail => {
-            console.log(updateMail);
-                setIsStar(updateMail.isStar)})
+                console.log(updateMail);
+                setIsStar(updateMail.isStar)
+            })
 
     }
-     starCls.current = (isStar) ? 'star' : ''
+    starCls.current = (isStar) ? 'star' : ''
     return (
         <section className={`mail ${read} ${isTrash} `} onClick={readMailClick} onMouseOver={showNav} onMouseOut={removeNav} >
             <span onClick={toggleStar} className={`click-star`}>

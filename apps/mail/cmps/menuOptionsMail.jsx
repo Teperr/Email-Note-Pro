@@ -85,7 +85,7 @@ export function MenuOptions({unReadCounter}) {
                 </span>
             </Link>
 
-            <Link to="/mail/trash">
+            <Link to={`/mail/trash/${'trash-page'}`}>
                 <span>
                 <i className="fa-regular fa-trash-can"></i>
                     <button>Trash</button>
