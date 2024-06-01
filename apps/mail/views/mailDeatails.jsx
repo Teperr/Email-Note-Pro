@@ -53,11 +53,10 @@ function removeMail(){
         // }
         // else {
             mailService.updateTrashMails(params.mailId)
-                .then(updateMail => {
-                    console.log(updateMail);
-                    setIsTrash('trash')
-                    navigate()
-                })
+                // .then(updateMail => {
+                //     console.log(updateMail);
+                //     setIsTrash('trash')
+                // })
         // }
 }
 
@@ -86,9 +85,9 @@ function unReadMail(){
                         </article>
                         <section className="actions">
                             <Link to="/mail"> <button title="Save as note" onClick={sentAsNote}><i className="fa-solid fa-paper-plane"></i></button></Link>
-                            <Link to="/mail"><button title="remove Mail" onClick={removeMail}><i className="fa-regular fa-trash-can"></i></button></Link>
+                            <Link to={`/mail/${params.folderName}`}><button title="remove Mail" onClick={removeMail}><i className="fa-regular fa-trash-can"></i></button></Link>
                             <Link to="/mail/newMail"><  button title ="replay email" ><i className="fa-solid fa-reply"></i></button></Link>
-                            <Link to="/mail/openMailPage"><button title="full page"><i className="fa-solid fa-expand"></i></button></Link>
+                            {/* <Link to="/mail/openMailPage"><button title="full page"><i className="fa-solid fa-expand"></i></button></Link> */}
                             <Link to="/mail" ><button onClick={unReadMail} title="pin as unread"><i className={`fa-regular fa-envelope`}></i></button></Link>
                             <Link to={`/mail/${params.folderName}`}  ><button title="Exit"><i className="fa-solid fa-arrow-right"></i></button></Link>
                         </section>
