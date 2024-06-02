@@ -57,6 +57,10 @@
    opacity: 1;
 } */
 
+.hide-nav{
+    display: none;
+}
+
 @media (width <= 600px) {
     .Menu-options {
       display: none;

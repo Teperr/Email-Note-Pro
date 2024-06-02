@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { useParams, useNavigate } = ReactRouter
 
 import { noteService } from '../services/note.service.js'
@@ -11,6 +11,9 @@ import { AddNote } from '../cmps/AddNote.jsx'
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    const hideClass = useRef('')
+    const [hideToEdit, setHideToEdit] = useState('')
+   
     // const [noteToEdit, setNoteToEdit] = useState({})
     // const [bgColor, setBgColor] = useState('#fff');
 
@@ -58,11 +61,25 @@ export function NoteIndex() {
 
 
     }
+    
+  
+
+    function onClickBurgerNav(className){ //hide-nav || ''
+        console.log('className:', className)
+        // hideClass.current = className
+        setHideToEdit(className)
+
+        // console.log('hideClass.current:', hideClass.current)
+    
+    
+    }
+
+
 
     return (
         <section>
             <div className="main-container">
-                <NoteHeader />
+                <NoteHeader ClickBurgerNav={onClickBurgerNav} />
                 <section className='accordion-continer'>
                     <AddNote title="Title..." onSave={onSave}>
                         <p>🍎</p>
@@ -71,7 +88,7 @@ export function NoteIndex() {
                 {/* <header className='pin-note'>
                 </header> */}
                 <main className="main-content">
-                    <MenuOptions />
+                    <MenuOptions hide={hideToEdit} />
                     {/* <PinNote /> */}
                     <NotesPage notes={notes} onRemove={onRemove} onBgColor={onBgColor} />
                 </main>
