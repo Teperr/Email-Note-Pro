@@ -1,24 +1,62 @@
 const { useState, useEffect, useRef } = React
 
+
 import { noteService } from '../../note/services/note.service.js'
-const { useNavigate } = ReactRouter
+import { mailService } from '../../mail/services/mail.service.js'
+const { useNavigate, useParams } = ReactRouter
 
 export function AddNote({ onSave }) {
     const [note, setNote] = useState(noteService.getEmptyNote())
     console.log('note:', note)
 
+    const params = useParams()
+
     const [isOpen, setIsOpen] = useState('')
     const formRef = useRef(null)
-
+    
+    // const infoRef = useRef({})
+    
     const openClass = isOpen ? 'open' : ''
-
-
+    
     const navigate = useNavigate()
+    
 
-    // useEffect(() => {
-    //     noteService.get
-    //     setNote()
-    // }, [])
+   
+    
+    const [isFromMail, setIsFromMail] = useState(false)
+    useEffect(() => {
+        
+        if (params) makeNoteFromMail()
+            
+        
+    }, [note])
+
+    function makeNoteFromMail() {
+        console.log('as note');
+        console.log('params.mailId:', params.mailId)
+        mailService.get(params.mailId)
+            .then(mail => {
+                setIsFromMail(true)
+                const infomation = { title: mail.subject, txt: mail.body }
+                // infoRef.current = infomation
+                setNote(prevNote => ({
+                    ...prevNote, ...prevNote.info, info: infomation
+                    
+                }))
+                
+                onSave(note)
+
+                console.log('note1111111111111111111111111:', note)
+
+
+            })
+
+    }
+
+
+
+
+
 
 
 
@@ -42,8 +80,11 @@ export function AddNote({ onSave }) {
         // Check if the new focus is outside the form
         if (formRef.current && !formRef.current.contains(ev.relatedTarget)) {
             setIsOpen('')
+
             onSave(note)
 
+
+            console.log('note:', note)
             formRef.current.reset()
             setNote(noteService.getEmptyNote())
 
@@ -52,7 +93,7 @@ export function AddNote({ onSave }) {
         }
     }
 
-  
+
     return (
         <form
             className={`accordion ${openClass}`}

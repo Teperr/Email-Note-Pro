@@ -13,14 +13,14 @@ export function NotePreview({ note, onRemove }) {
     const color = useRef('')
     const [bgColor, setBgColor] = useState('')
 
-    console.log('bgColor:', bgColor)
-    console.log('color:', color)
+    // console.log('bgColor:', bgColor)
+    // console.log('color:', color)
 
     useEffect(() => {
 
         noteService.get(note.id).then(note => {setBgColor(note.style.backgroundColor) })
 
-        console.log('bgColor:', bgColor)
+        // console.log('bgColor:', bgColor)
 
     }, [])
 

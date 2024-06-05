@@ -28,6 +28,7 @@ export function App() {
                 <Route path="/mail" element={<MailIndex />} />
                 <Route path="/mail/mail" element={<MailIndex />} />
                 <Route path="/note" element={<NoteIndex />} />
+                <Route path="/note/:mailId" element={<NoteIndex />} />
                 <Route path="/note/RemindersPage" element={<RemindersPage />} />
                 <Route path="/note/label" element={<LabelsPage />} />
                 <Route path="/note/archive" element={<ArchivesPage />} />

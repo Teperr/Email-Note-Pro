@@ -89,6 +89,7 @@ export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isT
             })
 
     }
+    
     starCls.current = (isStar) ? 'star' : ''
     return (
         <section className={`mail ${read} ${isTrash} `} onClick={readMailClick} onMouseOver={showNav} onMouseOut={removeNav} >
