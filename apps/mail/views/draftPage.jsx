@@ -10,7 +10,20 @@ import { EmailCompose } from "../cmps/EmailCompose.jsx"
 import { EmailFilter } from "../cmps/EmailFilter.jsx"
 
 export function DraftsPage() {
+    const [draftMails,setDraftMails]=useState([])
     const [filterBy, setFilterBy] = useState({ body: '' })
+
+    
+    useEffect(() => {
+        mailService.query(filterBy)
+            .then(mails =>{
+            const drafts=  mails.filter(mail=>(mail.isDraft)) 
+                setDraftMails(drafts)
+                console.log('drafts:', drafts)
+              
+            })
+  
+}, [filterBy])
 
     function OnsetFilterBy(newFilter) {
         setFilterBy(newFilter)
@@ -22,7 +35,7 @@ export function DraftsPage() {
 
             <main className="main-content">
                 <MenuOptions />
-                {/* <MailPages folder={drafts} mails={mails} onRemove={removeMail}/> */}
+                <MailPages folder={'drafts'} mails={draftMails} />
             </main>
         </div>
     </section>)
