@@ -80,7 +80,7 @@ function readMail(mailId) {
 function makeReadtoUnRead(mailId) {
     return storageService.get(MAIL_KEY, mailId)
         .then(mail => {
-            if (mail.isRead) mail.isRead = false
+             mail.isRead = false
             return save(mail)
         })
 }

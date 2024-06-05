@@ -13,7 +13,7 @@ import { MenuOptions } from "../cmps/menuOptionsMail.jsx"
 export function MailDetails() {
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [pinAsRead,setPinAsRead]=useState("-open")
+    const [pinAsRead, setPinAsRead] = useState("-open")
     const [isTrash, setIsTrash] = useState('')
 
     const params = useParams()
@@ -29,7 +29,7 @@ export function MailDetails() {
         mailService.get(params.mailId)
             .then(mail => {
                 setMail(mail)
-                
+
 
             })
             .catch(() => {
@@ -41,32 +41,32 @@ export function MailDetails() {
             })
     }
 
-function sentAsNote(){
-    console.log('as note');
-}
-function removeMail(){
-    console.log('remove mail');
-    ev.preventDefault()
+    function sentAsNote() {
+        console.log('as note');
+    }
+    function removeMail() {
+        console.log('remove mail');
+        ev.preventDefault()
         ev.stopPropagation()
         // if (isTrashPage === 'trash-page') {
         //     outFromStorage(params.mailId)
         // }
         // else {
-            mailService.updateTrashMails(params.mailId)
-                // .then(updateMail => {
-                //     console.log(updateMail);
-                //     setIsTrash('trash')
-                // })
+        mailService.updateTrashMails(params.mailId)
+        // .then(updateMail => {
+        //     console.log(updateMail);
+        //     setIsTrash('trash')
+        // })
         // }
-}
+    }
 
-function unReadMail(){
-    console.log(params.mailId);
-    mailService.makeReadtoUnRead(params.mailId)
-    .then( updateMail=>console.log(updateMail.isRead) )
-}
+    function unReadMail() {
+        console.log(params.mailId);
+        mailService.makeReadtoUnRead(params.mailId)
+            .then(setPinAsRead(previcon => previcon = previcon ? '' : '-open'))
+    }
 
-    // setPinAsRead(previcon=>previcon= previcon ? '':'-open')
+
 
 
     if (isLoading) return <h3>Loading...</h3>
@@ -86,9 +86,9 @@ function unReadMail(){
                         <section className="actions">
                             <Link to="/mail"> <button title="Save as note" onClick={sentAsNote}><i className="fa-solid fa-paper-plane"></i></button></Link>
                             <Link to={`/mail/${params.folderName}`}><button title="remove Mail" onClick={removeMail}><i className="fa-regular fa-trash-can"></i></button></Link>
-                            <Link to="/mail/newMail"><  button title ="replay email" ><i className="fa-solid fa-reply"></i></button></Link>
+                            <Link to="/mail/newMail"><  button title="replay email" ><i className="fa-solid fa-reply"></i></button></Link>
                             {/* <Link to="/mail/openMailPage"><button title="full page"><i className="fa-solid fa-expand"></i></button></Link> */}
-                            <Link to="/mail" ><button onClick={unReadMail} title="pin as unread"><i className={`fa-regular fa-envelope`}></i></button></Link>
+                            <Link to={`/mail/${params.folderName}`} ><button onClick={unReadMail} title="pin as unread"><i className={`fa-regular fa-envelope`}></i></button> </Link>
                             <Link to={`/mail/${params.folderName}`}  ><button title="Exit"><i className="fa-solid fa-arrow-right"></i></button></Link>
                         </section>
 
