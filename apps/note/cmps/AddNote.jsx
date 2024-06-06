@@ -1,68 +1,47 @@
 const { useState, useEffect, useRef } = React
+const { useNavigate, useParams } = ReactRouter
 
 
 import { noteService } from '../../note/services/note.service.js'
 import { mailService } from '../../mail/services/mail.service.js'
-const { useNavigate, useParams } = ReactRouter
 
-export function AddNote({ onSave }) {
+
+export function AddNote({ onSave, imageFiles }) {
     const [note, setNote] = useState(noteService.getEmptyNote())
-    console.log('note:', note)
-
-    const params = useParams()
-
     const [isOpen, setIsOpen] = useState('')
     const formRef = useRef(null)
-    
-    // const infoRef = useRef({})
-    
-    const openClass = isOpen ? 'open' : ''
-    
     const navigate = useNavigate()
-    
+    const params = useParams()
 
-   
-    
-    const [isFromMail, setIsFromMail] = useState(false)
+    const openClass = isOpen ? 'open' : ''
+
+    const [files, setFiles] = useState('') // הקובץ שהמשתמש בחר
+    const [previews, setPreviews] = useState(''); // התמונה שנציג למשתמש 
+
+
+
+    const [isFromMail, setIsFromMail] = useState(false);
     useEffect(() => {
-        
         if (params) makeNoteFromMail()
-            
-        
-    }, [note])
+    }, [note]);
+
 
     function makeNoteFromMail() {
-        console.log('as note');
-        console.log('params.mailId:', params.mailId)
         mailService.get(params.mailId)
             .then(mail => {
                 setIsFromMail(true)
-                const infomation = { title: mail.subject, txt: mail.body }
-                // infoRef.current = infomation
+                const information = { title: mail.subject, txt: mail.body };
                 setNote(prevNote => ({
-                    ...prevNote, ...prevNote.info, info: infomation
-                    
-                }))
-                
+                    ...prevNote, info: information
+                }));
+
                 onSave(note)
-
-                console.log('note1111111111111111111111111:', note)
-
-
-            })
-
+            });
     }
 
-
-
-
-
-
-
-
     function handleChangeTitle({ target }) {
-        const { type, name: prop } = target
-        let { value } = target
+        const { name: prop } = target;
+        let { value } = target;
 
         setNote(prevNote => ({
             ...prevNote, info: {
@@ -71,29 +50,31 @@ export function AddNote({ onSave }) {
         }))
     }
 
-    function onOpen(ev) {
-        if (ev.target.name === 'title') setIsOpen('open')
-    }
-
     function onClose(ev) {
-        ev.preventDefault()
-        // Check if the new focus is outside the form
+        ev.preventDefault();
         if (formRef.current && !formRef.current.contains(ev.relatedTarget)) {
-            setIsOpen('')
-
-            onSave(note)
-
-
-            console.log('note:', note)
-            formRef.current.reset()
+            setIsOpen('');
+            onSave(note);
+            formRef.current.reset();
             setNote(noteService.getEmptyNote())
 
-            console.log('ready to send to note index:', note)
-
         }
+
     }
 
+    function handleChangeImage({ target }){
+          const { name: prop } = target;
+        let { value } = target;
 
+        setNote(prevNote => ({
+            ...prevNote, info: {
+                ...prevNote.info, [prop]: value
+            }
+        }))
+    
+    }
+
+    
     return (
         <form
             className={`accordion ${openClass}`}
@@ -104,28 +85,37 @@ export function AddNote({ onSave }) {
             <section className="title-container">
                 <input
                     onChange={handleChangeTitle}
-                    onClick={onOpen}
                     value={note.info.title}
                     type="text"
                     name="title"
                     placeholder="Title/New Note..."
                 />
-
                 <div className="buttons-continer-accordion">
-
                     <span className="todo-list">
                         <i className="fa-regular fa-square-check"></i>
                     </span>
-
                     <span className="add-photo-to-note">
-                        <i className="fa-regular fa-image"></i>
+                        <label htmlFor="file-input">
+                            <i className="fa-regular fa-image"></i>
+                        </label>
+                        <input
+                            id="file-input"
+                            type='file'
+                            accept='image/jpg, image/jpeg, image/png'
+                            multiple
+                            onChange={ev => {
+                                if (ev.target.files && ev.target.files.length > 0) {
+                                    handleChangeImage()
+                                    setFiles(ev.target.files)
+                                    imageFiles(ev.target.files)
+                                }
+                            }}
+                        />
                     </span>
                 </div>
-
             </section>
 
             <section className="content">
-
                 <textarea
                     value={note.info.txt}
                     name="txt"
@@ -135,8 +125,8 @@ export function AddNote({ onSave }) {
                     placeholder="New Note..."
                     autoFocus
                 ></textarea>
-            </section>
 
+            </section>
         </form>
     )
 }

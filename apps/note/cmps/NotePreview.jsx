@@ -8,45 +8,36 @@ import { noteService } from '../services/note.service.js'
 
 
 
-export function NotePreview({ note, onRemove }) {
+export function NotePreview({ note, onRemove, imgfilesToNotePreview }) {
+    const [newNote, setNewNote] = useState(note)
+
+    const [bgColor, setBgColor] = useState('')
+    const [previews, setPreviews] = useState(imgfilesToNotePreview); // התמונה שנציג למשתמש 
 
     const color = useRef('')
-    const [bgColor, setBgColor] = useState('')
 
-    // console.log('bgColor:', bgColor)
-    // console.log('color:', color)
 
     useEffect(() => {
+        if (!imgfilesToNotePreview) return;
+        console.log('files:', imgfilesToNotePreview)
 
-        noteService.get(note.id).then(note => {setBgColor(note.style.backgroundColor) })
+        // יצירת URL לתמונה המועלת
+        const previewUrls = Array.from(imgfilesToNotePreview).map(file => URL.createObjectURL(file));
+        setPreviews(previewUrls);
 
-        // console.log('bgColor:', bgColor)
+        // שחרור זיכרון שנשמר עבור ה-URL הקודם (אם יש)
+        return () => {
+            previews.forEach(url => URL.revokeObjectURL(url))
+        };
+    }, [imgfilesToNotePreview])
 
+    useEffect(() => {
+        noteService.get(note.id).then(note => { setBgColor(note.style.backgroundColor) })
     }, [])
-
-
-
-
-    // console.log('NotePreview received onRemove:', onRemove);
-    // const [isLoading, setIsLoading] = useState(true)
-    
-    
-    // const [pinNote, setPinNote] = useState([]);
-
-
-    // useEffect(() => {
-    //     if (note && note.info) {
-    //         setIsLoading(false);
-    //     }
-    // }, [note])
 
     if (!note || !note.info) {
         return <div>Loading...</div>
     }
-
-    // console.log('note:', note.id)
-    // console.log('note.info.title:', note.info.txt)
-
     const [type, setType] = useState('photo1');
     const [hover, setHover] = useState('none');
 
@@ -59,18 +50,18 @@ export function NotePreview({ note, onRemove }) {
     }
 
     function onBgColor(noteId, bgColor) {
-        console.log('noteId:', noteId)
-        console.log('bgColor:', bgColor)
-
         noteService.bgColorNote(noteId, bgColor)
             .then(setBgColor(bgColor))
-
-
-        // noteService.save(newNote)
-        console.log('note:', note)
-
-
     }
+
+
+    function handleChangeImage() {
+        setNewNote(prevNote => ({
+            ...prevNote,
+            imagesFiles: previews
+        }))
+    }
+
 
 
 
@@ -89,6 +80,10 @@ export function NotePreview({ note, onRemove }) {
                 <section><span><button className="background-add-Archive-icon"><i className="fa-solid fa-bell"></i></button></span></section>
                 <section><span><button className="remove-note-icon" onClick={() => onRemove(note.id)}><i className="fa-regular fa-trash-can"></i></button></span></section>
             </section>
+
+            {previews && previews.map((preview, index) => (
+                <img key={index} src={preview} alt="Uploaded preview" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+            ))}
         </article>
     );
 }

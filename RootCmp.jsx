@@ -32,7 +32,8 @@ export function App() {
                 <Route path="/note/RemindersPage" element={<RemindersPage />} />
                 <Route path="/note/label" element={<LabelsPage />} />
                 <Route path="/note/archive" element={<ArchivesPage />} />
-                <Route path="/note/garbage" element={<GarbagePage />} />
+                <Route path="/note/trash" element={<GarbagePage />} />
+                <Route path="/note/trash/:trash" element={<GarbagePage />} />
 
                 <Route path="/mail/starred" element={<StarredPage />} />
                 <Route path="/mail/sent" element={<SentPage />} />
