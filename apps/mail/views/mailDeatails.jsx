@@ -85,6 +85,7 @@ export function MailDetails() {
     }
 
     function unReadMail() {
+        
         console.log(params.mailId);
         mailService.makeReadtoUnRead(params.mailId)
             .then(updateMail => console.log(updateMail.isRead))

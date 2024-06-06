@@ -1,4 +1,5 @@
 const { useState, useEffect, useRef } = React
+const { useParams, useNavigate } = ReactRouter
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
@@ -6,11 +7,13 @@ export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isT
     const date = useRef()
     date.current = (mail.sentAt.year < 2024)
         ? mail.sentAt.year : mail.sentAt.month + ' ' + utilService.padNum(mail.sentAt.day)
+        const navigate=useNavigate()
 
     const [read, setRead] = useState('')
 
     const [isStar, setIsStar] = useState(renderGoldStar)
     const [isTrash, setIsTrash] = useState('')
+    const [isDraft,setIsDraft]=useState('')
     const starCls = useRef('')
 
     const isBold = useRef('bold')
@@ -24,9 +27,8 @@ export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isT
         })
 
     }, [])
-    function readMailClick(ev) {
-        // ev.preventDefault()
-        // ev.stopPropagation()
+    function readMailClick() {
+   
         console.log(mail);
         mailService.readMail(mail.id)
             .then(updateReadMail => {
@@ -37,14 +39,7 @@ export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isT
     }
 
 
-    // console.log(mail);
-    // setRead(prevRead => {
-    //     isBold.current=mailService.readMail(mail) ? '':'bold'
-    //     const cls =isBold.current ? '' : 'read-mail'
 
-    //     console.log(cls);
-    //     return prevRead=cls
-    // })
 
 
 
@@ -76,6 +71,15 @@ export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isT
                 })
         }
 
+    }
+    function moveTodrafts(ev){
+        ev.preventDefault()
+        ev.stopPropagation()
+        mailService.moveTodrafts(mail.id)
+        .then(updateMail => {
+            console.log(updateMail);
+            navigate('mail/drafts')
+        })
     }
 
     function toggleStar(ev) {
@@ -113,14 +117,12 @@ export function MailPreview({ mail, renderGoldStar, updateUnreadAfterDelete, isT
             </span>
 
 
-            {/* <dialog className={`hover-nav-mail ${hover} `}> */}
             <nav className={hover}>
                 <button onClick={removeMail} title="trash" href="#"><i className="fa-regular fa-trash-can"></i></button>
                 <button onClick={readMailClick} title="pin as read" href="#"><i className="fa-regular fa-envelope-open"></i></button>
-                <button title="move to drafts" href="#"><i className="fa-solid fa-file-arrow-down"></i></button>
+                <button onClick={moveTodrafts} title="move to drafts" href="#"><i className="fa-solid fa-file-arrow-down"></i></button>
             </nav>
 
-            {/* </dialog> */}
         </section>
     )
 }

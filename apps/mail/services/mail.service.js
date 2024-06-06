@@ -27,6 +27,7 @@ export const mailService = {
     getSentEmptyMail,
     toggleStarData,
     updateTrashMails,
+    moveTodrafts,
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -160,4 +161,11 @@ function updateTrashMails(mailId) {
             mail.isTrash = !mail.isTrash
             return save(mail)
         })
+}
+function moveTodrafts(mailId){
+    return storageService.get(MAIL_KEY, mailId)
+    .then(mail => {
+        mail.isDraft = true
+        return save(mail)
+    })
 }
