@@ -10,7 +10,7 @@ export function NoteHeader({ ClickBurgerNav }) {
 
     return (
         <section className="mail-header">
-            <button onClick={() => {
+            <button className="toggle-nav" onClick={() => {
                 setIsOpen(prevOpen => !prevOpen)
                 ClickBurgerNav(cls.current)
             }}>
