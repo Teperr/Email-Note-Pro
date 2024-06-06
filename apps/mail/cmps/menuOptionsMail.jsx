@@ -12,9 +12,12 @@ export function MenuOptions({ unReadCounter }) {
 
     const [mail, setMail] = useState(mailService.getSentEmptyMail())
     const [show, setShow] = useState('none')
+const [setIsDrafts,isDrafts]=useState(false)
+
 
     const params = useParams()
     const navigate = useNavigate()
+
     function onSave(ev) {
         ev.preventDefault()
         console.log('send is clicked');
@@ -56,6 +59,21 @@ export function MenuOptions({ unReadCounter }) {
 
     function CloseMailForm() {
         setShow('none')
+        setMail(prevMail => {
+
+            prevMail.isDraft = true
+
+            mailService.save(prevMail)
+                .then(() => {
+                    console.log(prevMail);
+                })
+                .catch(() => {
+                    alert('Couldnt save')
+                    navigate('/mail')
+                })
+        }
+
+        )
     }
 
     return <section className="Menu-options">
@@ -101,7 +119,7 @@ export function MenuOptions({ unReadCounter }) {
             <form onSubmit={onSave} className={`mail-data  ${show} `}>
                 <nav className="header-new-mail compose-header">
                     <h3>New mail </h3>
-                    <button className="close-btn" onClick={CloseMailForm} type="button">X</button>
+                    <button className="close-btn" onClick={(mail) => CloseMailForm(mail)} type="button">X</button>
                 </nav>
                 <section className="data-new-mail-render">
                     <input onChange={handleChange} type="text" id="to" name="to" placeholder="to:" />

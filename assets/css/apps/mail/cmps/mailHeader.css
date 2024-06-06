@@ -70,3 +70,6 @@ button {
 .mail-header .header-buttons{
     gap: 1em;
 }
+.header-buttons h2:hover{
+background-color: gainsboro;
+}

@@ -110,7 +110,8 @@ function _createMails() {
                 name: userName,
                 isStar: false,
                 isSent: false,
-                isTrash: false
+                isTrash: false,
+                isDraft: false,
             }
 
             mails.push(mail)
@@ -139,7 +140,8 @@ function getSentEmptyMail(subject = '', to = '', body = '') {
         name: loggedinUser.fullname,
         isStar: false,
         isSent: true,
-        isTrash: false
+        isTrash: false,
+        isDraft: false
     }
     return mail
 }
