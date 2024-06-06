@@ -5,7 +5,7 @@ export function NoteHeader({ ClickBurgerNav }) {
     const [isOpen, setIsOpen] = useState(true)
 
     const cls = useRef('')
-    
+
     cls.current = isOpen ? 'none' : 'inline-block'
 
     return (
@@ -17,7 +17,8 @@ export function NoteHeader({ ClickBurgerNav }) {
 
                 <i className="fa-solid fa-book"></i></button>
 
-            <h2> Note Keep <i className="fa-solid fa-envelope"></i></h2>
+            <img className="logo-keep" src="assets/img/keep.png" alt="" />
+            <h2> Note Keep </h2>
 
             <form >
                 <input type="text" placeholder="search..." />
