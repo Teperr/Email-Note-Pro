@@ -12,7 +12,7 @@ export function MenuOptions({ unReadCounter }) {
 
     const [mail, setMail] = useState(mailService.getSentEmptyMail())
     const [show, setShow] = useState('none')
-
+const [setIsDrafts,isDrafts]=useState(false)
 
 
     const params = useParams()
@@ -65,7 +65,7 @@ export function MenuOptions({ unReadCounter }) {
 
             mailService.save(prevMail)
                 .then(() => {
-                    navigate('/mail/drafts')
+                    console.log(prevMail);
                 })
                 .catch(() => {
                     alert('Couldnt save')
