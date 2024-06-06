@@ -11,9 +11,11 @@ import { AddNote } from '../cmps/AddNote.jsx'
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    const [note, setNote] = useState(noteService.getEmptyNote())
     const hideClass = useRef('')
     const [hideToEdit, setHideToEdit] = useState('')
-   
+    const [imgfilesToNotePreview, setImgfilesToNotePreview] = useState('')
+
     // const [noteToEdit, setNoteToEdit] = useState({})
     // const [bgColor, setBgColor] = useState('#fff');
 
@@ -61,18 +63,28 @@ export function NoteIndex() {
 
 
     }
-    
-  
 
-    function onClickBurgerNav(className){ //hide-nav || ''
+
+
+    function onClickBurgerNav(className) { //hide-nav || ''
         console.log('className:', className)
         // hideClass.current = className
         setHideToEdit(className)
 
         // console.log('hideClass.current:', hideClass.current)
-    
-    
+
+
     }
+
+
+    function imageFiles(imgfiles) {
+        console.log('imgfiles:', imgfiles)
+        setImgfilesToNotePreview(imgfiles)
+
+    }
+
+    
+    
 
 
 
@@ -81,7 +93,7 @@ export function NoteIndex() {
             <div className="main-container">
                 <NoteHeader ClickBurgerNav={onClickBurgerNav} />
                 <section className='accordion-continer'>
-                    <AddNote title="Title..." onSave={onSave}>
+                    <AddNote title="Title..." onSave={onSave} imageFiles={imageFiles}>
                         <p>🍎</p>
                     </AddNote>
                 </section>
@@ -90,7 +102,7 @@ export function NoteIndex() {
                 <main className="main-content">
                     <MenuOptions hide={hideToEdit} />
                     {/* <PinNote /> */}
-                    <NotesPage notes={notes} onRemove={onRemove} onBgColor={onBgColor} />
+                    <NotesPage notes={notes} onRemove={onRemove} onBgColor={onBgColor} imgfilesToNotePreview={imgfilesToNotePreview} />
                 </main>
                 <div className="footer">Footer</div>
             </div>

@@ -95,14 +95,15 @@ function _createNote(type) {
     note.id = utilService.makeId()
     note.createdAt = new Date()
     note.type = type
-
-
-
+    note.imagesFiles = {}
+    
+    
+    
     return note
 }
 
-function getEmptyNote(id = '', type = '', createdAt = '', isPinned = false, style = { backgroundColor: '' }, info = { title: '', txt: '' },) {
-    return { id, createdAt, type, isPinned, style, info }
+function getEmptyNote(id = '', type = '', createdAt = '', isPinned = false, style = { backgroundColor: '' }, info = { title: '', txt: '' } ,imagesFiles={})  {
+    return { id, createdAt, type, isPinned, style, info, imagesFiles }
 }
 
 

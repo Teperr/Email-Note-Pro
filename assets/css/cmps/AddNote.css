@@ -72,6 +72,11 @@
     
 }
 
+
+.buttons-continer-accordion input[type='file'] {
+   display: none;
+}
+
 .add-photo-to-note{
     display: flex;
     justify-content: center;
@@ -91,12 +96,12 @@
     height: 40px;
     font-size: 14px;
     padding: 0px;
-
-    background: none;
-	color: inherit;
     border: none;
+
+    /* background: none;
+	color: inherit;
     cursor: text;
-    outline: inherit;
+    outline: inherit; */
     
 }
 
